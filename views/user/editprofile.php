@@ -40,6 +40,9 @@ $user = $userService->getUserById($userId);
                             }
                         ?>
                     </div>
+                    <div class="alert alert-info" role="alert">
+                        <p class="text-center"><strong>Note: </strong>After update you will be logged out</p>
+                    </div>
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-8">
                             <form id="editProfileForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/performupdateprofile.php" method="post">
