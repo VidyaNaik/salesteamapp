@@ -80,7 +80,7 @@ class UserService {
     }
 
     /**
-     * Update profile
+     * Update profile [self]
      */
     public function updateProfile($fname, $email, $password, $userId) {
         $password = $this->openssl->encrypt($password);
