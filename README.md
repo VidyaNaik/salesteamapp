@@ -56,3 +56,7 @@ In BDE's Login You should not allow to add a duplicate client.  company website 
 
 Regards
 Chandu.
+
+Functionalities:
+
+![alt text](https://github.com/pingslayer/salesteamapp/blob/master/functionalities.jpg)
