@@ -96,6 +96,10 @@ $user = $userService->getUserById($userId);
         var email = "";
         var emailErrMsg = "";
         var emailErrFlag = true;
+        var pass = "";
+        var passErrMsg = "";
+        var passErrFlag = true;
+        
         /**
         name validation */
         function validate_fname() {

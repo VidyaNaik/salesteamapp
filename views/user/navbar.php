@@ -48,7 +48,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Welcome, <?php echo $_SESSION['email']; ?></a></li>
-                <li><a href="<?php echo BASEURL; ?>actions/performeditprofile.php">Edit Profile</a></li>
+                <li><a href="editprofile.php">Edit Profile</a></li>
                 <li><a href="<?php echo BASEURL; ?>actions/performlogout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
             </ul>
         </div>

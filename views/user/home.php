@@ -1,8 +1,5 @@
 <?php
 session_start();
-/**
- * Admin Only Allowed
- */
 if(!isset($_SESSION["email"])) {
     header("Location:../login.php");
 }

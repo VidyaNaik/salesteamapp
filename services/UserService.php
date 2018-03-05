@@ -80,6 +80,17 @@ class UserService {
     }
 
     /**
+     * Update profile
+     */
+    public function updateProfile($fname, $email, $password, $userId) {
+        $password = $this->openssl->encrypt($password);
+        $stmt = $this->connection->prepare("update users set user_name = ?, user_email = ?, user_password = ? where user_id = ?");
+        $stmt->bind_param("sssi", $fname, $email, $password, $userId);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    /**
      * Get user by user id
      */
     public function getUserById($userId) {
