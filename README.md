@@ -58,5 +58,6 @@ Regards
 Chandu.
 
 Functionalities:
+--------------
 
 ![alt text](https://github.com/pingslayer/salesteamapp/blob/master/functionalities.jpg)
