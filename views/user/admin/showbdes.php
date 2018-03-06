@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../error/noaccess.php");
+    header("Location: ../../error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -88,7 +88,7 @@ $managerId = $user->getEmpId();
             $("#load-more-btn").prop('disabled', true);
             $.ajax({
                 type: "POST",
-                url: "<?php echo BASEURL ?>actions/performfetchbdelistforbdm.php",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchbdelistforbdm.php",
                 data: {
                     offset: updateOffset,
                     managerId: <?php echo $managerId; ?>
@@ -128,7 +128,7 @@ $managerId = $user->getEmpId();
             if(result) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo BASEURL ?>actions/performunassignbde.php",
+                    url: "<?php echo BASEURL ?>actions/admin/performunassignbde.php",
                     data: {
                         bdeId: userId
                     },

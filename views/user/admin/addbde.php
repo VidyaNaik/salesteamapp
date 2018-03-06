@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../error/noaccess.php");
+    header("Location: ../../error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -30,7 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">Add New B.D.M</h2>
+                    <h2 class="text-center">Add New B.D.E</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -41,7 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-8">
-                            <form id="addBDMForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/performaddbdm.php" method="post">
+                            <form id="addBDEForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/admin/performaddbde.php" method="post">
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-2" for="fname">Full Name</label>
                                     <div class="col-sm-10">
@@ -65,8 +65,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 </div>
                                 <div class="form-group form-group-mod"> 
                                     <div class="col-sm-12 text-center">
-                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addBDMFormValidation()">Add</button>
-                                        <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="addBDMFormReset()">Clear</button>
+                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addBDEFormValidation()">Add</button>
+                                        <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="addBDEFormReset()">Clear</button>
                                     </div>
                                 </div>
                             </form>
@@ -121,15 +121,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
         /**
         enter key submit */
-        $("#addBDMForm").keypress(function(e) {
+        $("#addBDEForm").keypress(function(e) {
             if(e.which == 13) {
-                addBDMFormValidation();
+                addBDEFormValidation();
             }
         });
 
         /**
         form validation and submitting */
-        function addBDMFormValidation() {
+        function addBDEFormValidation() {
             $("#server-message").text("");
             validate_fname();
             validate_email();
@@ -138,13 +138,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 $("#email").prop('readonly', true);
                 $("#reset-btn").prop('disabled', true);
                 $("#add-btn").prop('disabled', true);
-                $("#addBDMForm").submit();
+                $("#addBDEForm").submit();
             }
         }
 
         /**
         form reset */
-        function addBDMFormReset() {
+        function addBDEFormReset() {
             fnameErrFlag = true;
             emailErrFlag = true;
             fnameErrMsg = "";

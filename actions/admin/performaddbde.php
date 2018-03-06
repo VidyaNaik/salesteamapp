@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../views/error/noaccess.php");
+    header("Location: ../../views/error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -21,13 +21,13 @@ if(validateDetails($fname, $email)) {
     if($userService->checkEmail($email)) {
         $userService->saveUser($fname, $email, DEFAULT_PASSWORD, $role->getId());
         $_SESSION['serverMsg'] = "BDE Registered Successfully!";
-        header("Location:../views/user/bdelist.php");
+        header("Location:../../views/user/admin/bdelist.php");
     } else { 
         $_SESSION['serverMsg'] = "E-Mail ID Is Already Taken!";
-        header("Location:../views/user/addbde.php");
+        header("Location:../../views/user/admin/addbde.php");
     }
 } else {
-    header("Location:../views/user/addbde.php");
+    header("Location:../../views/user/admin/addbde.php");
 }
 
 /**

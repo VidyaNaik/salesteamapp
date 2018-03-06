@@ -11,14 +11,14 @@
         </div>
         <div class="collapse navbar-collapse" id="app-header-collape">
             <ul class="nav navbar-nav">
-                <li><a href="home.php">Home</a></li>
+                <li><a href="../home.php">Home</a></li>
                 <!-- Admin Access Only -->
                 <?php if ($_SESSION['role'] == "ADMIN") : ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">BDM<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="admin/addbdm.php">Add BDM</a></li>
-                        <li><a href="admin/bdmlist.php">BDM List</a></li>
+                        <li><a href="addbdm.php">Add BDM</a></li>
+                        <li><a href="bdmlist.php">BDM List</a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
@@ -27,8 +27,8 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">BDE<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="admin/addbde.php">Add BDE</a></li>
-                        <li><a href="admin/bdelist.php">BDE List</a></li>
+                        <li><a href="addbde.php">Add BDE</a></li>
+                        <li><a href="bdelist.php">BDE List</a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
@@ -48,7 +48,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Welcome, <?php echo $_SESSION['email']; ?></a></li>
-                <li><a href="editprofile.php">Edit Profile</a></li>
+                <li><a href="../editprofile.php">Edit Profile</a></li>
                 <li><a href="<?php echo BASEURL; ?>actions/performlogout.php"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
             </ul>
         </div>

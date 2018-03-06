@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../error/noaccess.php");
+    header("Location: ../../error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -83,7 +83,7 @@ $bdm = $userService->getUserByEmpId($bde->getManager());
             if(result) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo BASEURL ?>actions/performunassignbde.php",
+                    url: "<?php echo BASEURL ?>actions/admin/performunassignbde.php",
                     data: {
                         bdeId: <?php echo $bde->getId(); ?>
                     },

@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../views/error/noaccess.php");
+    header("Location: ../../views/error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/UserService.php');
@@ -20,13 +20,13 @@ if(validateDetails($fname, $email, $password, $roleId, $userId)) {
     if($userService->checkEmailAllowSelf($email, $originalEmail)) {
         $userService->updateUser($fname, $email, $password, $roleId, $userId);
         $_SESSION['serverMsg'] = "BDM Updated Successfully!";
-        header("Location:../views/user/bdmlist.php");
+        header("Location:../../views/user/admin/bdmlist.php");
     } else { 
         $_SESSION['serverMsg'] = "E-Mail ID Is Already Taken!";
-        header("Location:../views/user/editbdm.php?roleId=".$roleId."&userId=".$userId);
+        header("Location:../../views/user/admin/editbdm.php?roleId=".$roleId."&userId=".$userId);
     }
 } else {
-    header("Location:../views/user/editbdm.php");
+    header("Location:../../views/user/admin/editbdm.php?roleId=".$roleId."&userId=".$userId);
 }
 
 /**

@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../error/noaccess.php");
+    header("Location: ../../error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -12,7 +12,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/RoleService.php')
 
 $roleService = new RoleService();
 $role = $roleService->getByRoleName("BDM");
-$bdeId = $_GET["bdeId"];
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +35,7 @@ $bdeId = $_GET["bdeId"];
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">B.D.M Available</h2>
+                    <h2 class="text-center">B.D.M List</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -51,6 +50,7 @@ $bdeId = $_GET["bdeId"];
                                 <tr class="info">
                                     <th>Full Name</th>
                                     <th>E-Mail Address</th>
+                                    <th>Password</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -77,7 +77,7 @@ $bdeId = $_GET["bdeId"];
             $("#load-more-btn").prop('disabled', true);
             $.ajax({
                 type: "POST",
-                url: "<?php echo BASEURL ?>actions/performfetchbdmlist.php",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchbdmlist.php",
                 data: {
                     offset: updateOffset,
                     roleId: <?php echo $role->getId(); ?>
@@ -101,7 +101,8 @@ $bdeId = $_GET["bdeId"];
                         bdmListBuilder += "<tr>";
                         bdmListBuilder += "<td>" + response[i].name + "</td>";
                         bdmListBuilder += "<td>" + response[i].email + "</td>";
-                        bdmListBuilder += "<td><button class='btn btn-success' onclick='assignBDM(" + response[i].empId + ")'>Assign</button></td>";
+                        bdmListBuilder += "<td>" + response[i].password + "</td>";
+                        bdmListBuilder += "<td><button title='Show BDEs' class='btn btn-default action-btn' onclick='showBDEs(" + response[i].id + ")'><span class='glyphicon glyphicon-pawn'></span></button><button title='Edit' class='btn btn-default action-btn' onclick='editBdm(" + response[i].id + ")'><span class='glyphicon glyphicon-edit'></span></button><button title='Delete' class='btn btn-default action-btn' onclick='deleteBdm(" + response[i].id + "," + response[i].empId + ")'><span class='glyphicon glyphicon-trash'></span></button></td>";
                         bdmListBuilder += "</tr>";
                     }
                     $("#bdm-list").append(bdmListBuilder);
@@ -112,18 +113,26 @@ $bdeId = $_GET["bdeId"];
             });
         }
 
-        function assignBDM(empId) {
+        function editBdm(userId) {
+            window.location = 'editbdm.php?roleId=' + <?php echo $role->getId(); ?> + '&' + 'userId=' + userId;
+        }
+
+        function showBDEs(userId) {
+            window.location = 'showbdes.php?bdmId=' + userId;
+        }
+
+        function deleteBdm(userId, empId) {
             var result = confirm("Are You Sure?");
             if(result) {
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo BASEURL ?>actions/performassignbdm.php",
+                    url: "<?php echo BASEURL ?>actions/admin/performdeletebdm.php",
                     data: {
-                        managerId: empId,
-                        bdeId: <?php echo $bdeId; ?>
+                        userId: userId,
+                        empId: empId
                     },
                     success: function(response) {
-                        window.location = 'bdelist.php';
+                        window.location.reload();
                     }
                 });
             }

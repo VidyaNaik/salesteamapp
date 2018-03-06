@@ -4,7 +4,7 @@ session_start();
  * Admin Only Allowed
  */
 if($_SESSION['role'] !== "ADMIN") {
-    header("Location: ../error/noaccess.php");
+    header("Location: ../../error/noaccess.php");
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
@@ -35,7 +35,7 @@ $user = $userService->getUserById($userId);
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">Edit B.D.E</h2>
+                    <h2 class="text-center">Edit B.D.M</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -46,7 +46,7 @@ $user = $userService->getUserById($userId);
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-8">
-                            <form id="editBDEForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/performupdatebde.php" method="post">
+                            <form id="editBDMForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/admin/performupdatebdm.php" method="post">
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-2" for="fname">Full Name</label>
                                     <div class="col-sm-10">
@@ -76,8 +76,8 @@ $user = $userService->getUserById($userId);
                                 <input type="hidden" name="userId" value="<?php echo $userId; ?>">
                                 <div class="form-group form-group-mod"> 
                                     <div class="col-sm-12 text-center">
-                                        <button id="edit-btn" type="button" class="btn btn-primary form-btn" onclick="editBDEFormValidation()">Update</button>
-                                        <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="editBDEFormReset()">Clear</button>
+                                        <button id="edit-btn" type="button" class="btn btn-primary form-btn" onclick="editBDMFormValidation()">Update</button>
+                                        <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="editBDMFormReset()">Clear</button>
                                     </div>
                                 </div>
                             </form>
@@ -153,13 +153,13 @@ $user = $userService->getUserById($userId);
         enter key submit */
         $("#editBDMForm").keypress(function(e) {
             if(e.which == 13) {
-                editBDEFormValidation();
+                editBDMFormValidation();
             }
         });
 
         /**
         form validation and submitting */
-        function editBDEFormValidation() {
+        function editBDMFormValidation() {
             $("#server-message").text("");
             validate_fname();
             validate_email();
@@ -170,13 +170,13 @@ $user = $userService->getUserById($userId);
                 $("#pass").prop('readonly', true);
                 $("#reset-btn").prop('disabled', true);
                 $("#edit-btn").prop('disabled', true);
-                $("#editBDEForm").submit();
+                $("#editBDMForm").submit();
             }
         }
 
         /**
         form reset */
-        function editBDEFormReset() {
+        function editBDMFormReset() {
             fnameErrFlag = true;
             emailErrFlag = true;
             passErrFlag = true;

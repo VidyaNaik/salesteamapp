@@ -1,15 +1,15 @@
 <div class="list-group" id="side-menu">
     <a href="home.php" class="list-group-item">Home</a>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="addbdm.php" class="list-group-item">Add BDM</a>
+        <a href="admin/addbdm.php" class="list-group-item">Add BDM</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="addbde.php" class="list-group-item">Add BDE</a>
+        <a href="admin/addbde.php" class="list-group-item">Add BDE</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="bdmlist.php" class="list-group-item">BDM List</a>
+        <a href="admin/bdmlist.php" class="list-group-item">BDM List</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="bdelist.php" class="list-group-item">BDE List</a>
+        <a href="admin/bdelist.php" class="list-group-item">BDE List</a>
     <?php endif; ?>
 </div>
