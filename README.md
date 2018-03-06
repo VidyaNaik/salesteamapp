@@ -21,34 +21,34 @@ Admin will see the reports like how many clients added by BDE's and how many pro
 
 Admin Login
 --------------
-Home
-BDM List
-BDE List
-Client List - See all the client records added  and the status 
-Add a client
-Add a BDM
-Add a BDE
-Assign BDE's to BDM
-Logout
+Home  
+BDM List  
+BDE List  
+Client List - See all the client records added  and the status  
+Add a client  
+Add a BDM  
+Add a BDE  
+Assign BDE's to BDM  
+Logout  
 
 
 BDM  login
 ------------
-Home
-Profile
-BDE List
-Client List - See all the client records added  and along with a link "Send proposal"
-Add a client
-Logout
+Home  
+Profile  
+BDE List  
+Client List - See all the client records added  and along with a link "Send proposal"  
+Add a client  
+Logout  
 
 
 BDE  login
 ------------
-Home
-Profile
-Client List - See all the client records added  and along with a link "Status"
-Add a client
-Logout
+Home  
+Profile  
+Client List - See all the client records added  and along with a link "Status"  
+Add a client  
+Logout  
 
 In BDE's Login You should not allow to add a duplicate client.  company website should be unique. No two entries with the same website.  you need to use ajax to check after entering the company website.
 
