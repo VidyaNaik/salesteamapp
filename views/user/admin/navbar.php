@@ -32,6 +32,10 @@
                     </ul>
                 </li>
                 <?php endif; ?>
+                <!-- Admin Access Only -->
+                <?php if ($_SESSION['role'] == "ADMIN") : ?>
+                    <li><a href="addlocation.php">Add Location</a></li>
+                <?php endif; ?>
                 <!-- BDM & BDE Access Only -->
                 <?php if ($_SESSION['role'] == "BDM" || $_SESSION['role'] == "BDE") : ?>
                 <li class="dropdown">

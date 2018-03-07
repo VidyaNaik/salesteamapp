@@ -12,4 +12,7 @@
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
         <a href="admin/bdelist.php" class="list-group-item">BDE List</a>
     <?php endif; ?>
+    <?php if ($_SESSION['role'] == "ADMIN") : ?>
+        <a href="admin/addlocation.php" class="list-group-item">Add Location</a>
+    <?php endif; ?>
 </div>
