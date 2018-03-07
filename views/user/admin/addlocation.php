@@ -139,13 +139,19 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
     <?php include 'footer.php';?>
     <script>
 
+        var addDivType = "";
+
         $(document).ready(function() {
             $("#add-country-div").hide();
             $("#add-state-div").hide();
             $("#add-city-div").hide();
+            $("#city-countryName").change(function(){
+                loadStatesForCountry();
+            });
         });
 
         function showAddCountryDiv() {
+            addDivType = "country";
             $("#add-country-div").show();
             $("#add-state-div").hide();
             $("#add-city-div").hide();
@@ -154,9 +160,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $("#add-city-btn").attr('class', 'btn btn-default  action-btn btn-identical-dimension');
             addCountryFormReset();
             addStateFormReset();
+            addCityFormReset();
         }
 
         function showAddStateDiv() {
+            addDivType = "state";
             $("#add-country-div").hide();
             $("#add-state-div").show();
             $("#add-city-div").hide();
@@ -165,9 +173,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $("#add-city-btn").attr('class', 'btn btn-default  action-btn btn-identical-dimension');
             addCountryFormReset();
             addStateFormReset();
+            addCityFormReset();
+            loadCountries();
         }
 
         function showAddCityDiv() {
+            addDivType = "city";
             $("#add-country-div").hide();
             $("#add-state-div").hide();
             $("#add-city-div").show();
@@ -176,6 +187,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $("#add-city-btn").attr('class', 'btn btn-success  action-btn btn-identical-dimension');
             addCountryFormReset();
             addStateFormReset();
+            addCityFormReset();
+            loadCountries();
         }
 
         /**
@@ -384,7 +397,60 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $("#city-cityName").css({"border-color":"#ccc"});
             $("#server-message").text("");
         }
-        
+
+        /**
+        Load Countries AJAX */
+
+        function loadCountries() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/performfetchlocations.php",
+                data: {
+                    query: "all-contries"
+                },
+                success: function(response) {
+                    if(response.length == 0) {
+                        return;
+                    }
+                    var optionsBuilder = "<option value=''>Select Country</option>";
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    if(addDivType === "state") {
+                        $("#state-countryName").html(optionsBuilder);
+                    } else if(addDivType === "city") {
+                        $("#city-countryName").html(optionsBuilder);
+                    }
+                }
+            });
+        }
+
+        /**
+        Load State AJAX */
+        function loadStatesForCountry() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/performfetchlocations.php",
+                data: {
+                    query: "all-states-of-a-country",
+                    countryId: $("#city-countryName").val()
+                },
+                success: function(response) {
+                    if(response.length == 0) {
+                        return;
+                    }
+                    var optionsBuilder = "<option value=''>Select State</option>";
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    $("#city-stateName").html(optionsBuilder);
+                }
+            });
+        }
 
     </script>
 </body>
