@@ -32,22 +32,19 @@
                     </ul>
                 </li>
                 <?php endif; ?>
-                <!-- Admin Access Only -->
-                <?php if ($_SESSION['role'] == "ADMIN") : ?>
-                    <li><a href="admin/addlocation.php">Add Location</a></li>
-                <?php endif; ?>
-                <!-- BDM & BDE Access Only -->
-                <?php if ($_SESSION['role'] == "BDM" || $_SESSION['role'] == "BDE") : ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <!-- BDE Access Only -->
-                        <?php if ($_SESSION['role'] == "BDE") : ?>
-                        <li><a href="#">Add Client</a></li>
+                        <!--Admin And BDE Access Only -->
+                        <?php if ($_SESSION['role'] == "ADMIN" || $_SESSION['role'] == "BDE") : ?>
+                        <li><a href="admin/addclient.php">Add Client</a></li>
                         <?php endif; ?>
-                        <li><a href="#">Client List</a></li>
+                        <li><a href="clientlist.php">Client List</a></li>
                     </ul>
                 </li>
+                <!-- Admin Access Only -->
+                <?php if ($_SESSION['role'] == "ADMIN") : ?>
+                    <li><a href="admin/addlocation.php">Add Location</a></li>
                 <?php endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">

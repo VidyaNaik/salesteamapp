@@ -41,7 +41,7 @@ class BdeService {
     /**
      * Delete by user id
      */
-    public function deleteUserById($userId) {
+    public function deleteById($userId) {
         $stmt = $this->connection->prepare("delete from users where user_id = ?");
         $stmt->bind_param("i", $userId);
         $stmt->execute();

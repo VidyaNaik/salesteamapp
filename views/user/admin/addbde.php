@@ -65,7 +65,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 </div>
                                 <div class="form-group form-group-mod"> 
                                     <div class="col-sm-12 text-center">
-                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addBDEFormValidation()">Add</button>
+                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addBDEFormValidation()">Save</button>
                                         <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="addBDEFormReset()">Clear</button>
                                     </div>
                                 </div>

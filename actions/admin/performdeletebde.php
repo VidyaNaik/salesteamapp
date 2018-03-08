@@ -13,7 +13,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/BdeService.php');
 $bdeService = new BdeService();
 $userId = $_POST['userId'];
 
-$affected_rows = $bdeService->deleteUserById($userId);
+$affected_rows = $bdeService->deleteById($userId);
 if($affected_rows == 0) {
     $_SESSION['serverMsg'] = "BDE was not deleted!";
     return;
