@@ -250,8 +250,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </form>
                 </div>
                 <div class="modal-footer modal-footer-mod">
-                    <button type="button" class="btn btn-primary action-btn btn-identical-dimension" onclick="addContactFieldsToMainForm()">Add</button>
-                    <button type="button" class="btn btn-danger action-btn btn-identical-dimension" onclick="cancelContact()">Cancel</button>
+                    <button id="contactModalSuccessBtn" type="button" class="btn btn-primary action-btn btn-identical-dimension"></button>
+                    <button id="contactModalFailBtn" type="button" class="btn btn-danger action-btn btn-identical-dimension"></button>
                 </div>
             </div>
         </div>
@@ -261,108 +261,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         var contactId = 0;
 
         function showContactForm() {
-            contactId++;
-            $("#number-of-contact").html("#" + contactId);
-            setContactAttributes(contactId);
+            //$("#number-of-contact").html("#" + contactId);
+            $("#contactModalSuccessBtn").attr('onclick', 'addContactFieldsToMainForm()');
+            $("#contactModalSuccessBtn").text('Add');
+            $("#contactModalFailBtn").attr('onclick', 'cancelContact()');
+            $("#contactModalFailBtn").text('Cancel');
             $("#contactModal").modal();
-        }
-
-        function setContactAttributes(contactId) {
-            /**
-            Set First Name Attributes
-            */
-            $("#contact-first-name-div input").attr('id', 'contact_' + contactId + '_firstName');
-            $("#contact-first-name-div input").attr('name', 'contact_' + contactId + '_firstName');
-            $("#contact-first-name-div p").attr('id', 'contact_' + contactId + '_firstNameErrMsg');
-
-            /**
-            Set Last Name Attributes
-            */
-            $("#contact-last-name-div input").attr('id', 'contact_' + contactId + '_lastName');
-            $("#contact-last-name-div input").attr('name', 'contact_' + contactId + '_lastName');
-            $("#contact-last-name-div p").attr('id', 'contact_' + contactId + '_lastNameErrMsg');
-
-            /**
-            Set Email Attributes
-            */
-            $("#contact-email-div input").attr('id', 'contact_' + contactId + '_email');
-            $("#contact-email-div input").attr('name', 'contact_' + contactId + '_email');
-            $("#contact-email-div p").attr('id', 'contact_' + contactId + '_emailErrMsg');
-
-            /**
-            Set Category Attributes
-            */
-            $("#contact-category-div input").attr('id', 'contact_' + contactId + '_category');
-            $("#contact-category-div input").attr('name', 'contact_' + contactId + '_category');
-            $("#contact-category-div p").attr('id', 'contact_' + contactId + '_categoryErrMsg');
-
-            /**
-            Set Designation Attributes
-            */
-            $("#contact-designation-div input").attr('id', 'contact_' + contactId + '_designation');
-            $("#contact-designation-div input").attr('name', 'contact_' + contactId + '_designation');
-            $("#contact-designation-div p").attr('id', 'contact_' + contactId + '_designationErrMsg');
-
-            /**
-            Set Mobile Attributes
-            */
-            $("#contact-mobile-div input").attr('id', 'contact_' + contactId + '_mobile');
-            $("#contact-mobile-div input").attr('name', 'contact_' + contactId + '_mobile');
-            $("#contact-mobile-div p").attr('id', 'contact_' + contactId + '_mobileErrMsg');
-            
-            /**
-            Set Country Attributes 
-            */
-            $("#contact-country-div input").attr('id', 'contact_' + contactId + '_country');
-            $("#contact-country-div input").attr('name', 'contact_' + contactId + '_country');
-            $("#contact-country-div p").attr('id', 'contact_' + contactId + '_countryErrMsg');
-
-            /**
-            Set State Attributes
-            */
-            $("#contact-state-div input").attr('id', 'contact_' + contactId + '_state');
-            $("#contact-state-div input").attr('name', 'contact_' + contactId + '_state');
-            $("#contact-state-div p").attr('id', 'contact_' + contactId + '_stateErrMsg');
-
-            /**
-            Set City Attributes 
-            */
-            $("#contact-city-div input").attr('id', 'contact_' + contactId + '_city');
-            $("#contact-city-div input").attr('name', 'contact_' + contactId + '_city');
-            $("#contact-city-div p").attr('id', 'contact_' + contactId + '_cityErrMsg');
-            
-            /**
-            Set LinkedIn Attributes
-            */
-            $("#contact-linkedin-div input").attr('id', 'contact_' + contactId + '_linkedin');
-            $("#contact-linkedin-div input").attr('name', 'contact_' + contactId + '_linkedin');
-            $("#contact-linkedin-div p").attr('id', 'contact_' + contactId + '_linkedinErrMsg');
-
-            /**
-            Set Facebook Attributes 
-            */
-            $("#contact-facebook-div input").attr('id', 'contact_' + contactId + '_facebook');
-            $("#contact-facebook-div input").attr('name', 'contact_' + contactId + '_facebook');
-            $("#contact-facebook-div p").attr('id', 'contact_' + contactId + '_facebookErrMsg');
-
-            /**
-            Set Twitter Attributes 
-            */
-            $("#contact-twitter-div input").attr('id', 'contact_' + contactId + '_twitter');
-            $("#contact-twitter-div input").attr('name', 'contact_' + contactId + '_twitter');
-            $("#contact-twitter-div p").attr('id', 'contact_' + contactId + '_twitterErrMsg');
-
-            /**
-            Set Address Attributes 
-            */
-            $("#contact-address-div textarea").attr('id', 'contact_' + contactId + '_address');
-            $("#contact-address-div textarea").attr('name', 'contact_' + contactId + '_address');
-            $("#contact-address-div p").attr('id', 'contact_' + contactId + '_addressErrMsg');
         }
 
         function cancelContact() {
             resetContactForm();
-            contactId--;
         }
 
         function resetContactForm() {
@@ -386,6 +294,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         Note: Main form is addClientForm 
         */
         function addContactFieldsToMainForm() {
+            contactId++;
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_firstName'  name='contact_form_" + contactId + "_firstName' value='" + $("#contact-first-name-div input").val() + "'>");
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_lastName' name='contact_form_" + contactId + "_lastName' value='" + $("#contact-last-name-div input").val() + "'>");
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_email' name='contact_form_" + contactId + "_email' value='" + $("#contact-email-div input").val() + "'>");
@@ -399,22 +308,158 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_facebook' name='contact_form_" + contactId + "_facebook' value='" + $("#contact-facebook-div input").val() + "'>");
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_twitter' name='contact_form_" + contactId + "_twitter' value='" + $("#contact-twitter-div input").val() + "'>");
             $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_address' name='contact_form_" + contactId + "_address' value='" + $("#contact-address-div input").val() + "'>");
-            $('#client-contact-pool').append("<div class='cmplx-btn btn btn-success form-btn'><div title='Edit Contact' class='cmplx-btn-wrapper' onclick='editContact(" + contactId + ")'>" + $("#contact-first-name-div input").val() + "</div><div class='cmplx-options-wrapper'><span title='Remove Contact' class='glyphicon glyphicon-remove' onclick='deleteContact(" + contactId + ")'></span></div></div>");
+            $('#client-contact-pool').prepend("<div id='cmplx-btn-" + contactId + "' class='cmplx-btn btn btn-success form-btn'><div title='Edit Contact' class='cmplx-btn-wrapper' onclick='editContact(" + contactId + ")'>" + $("#contact-first-name-div input").val() + "</div><div class='cmplx-options-wrapper'><span title='Remove Contact' class='glyphicon glyphicon-remove' onclick='deleteContact(" + contactId + ")'></span></div></div>");
             resetContactForm();
         }
 
-        function editContact(contactId) {
+        /**
+        Edit Contact Ops
+        */
+        function editContact(id) {
+            $("#contactModalSuccessBtn").attr('onclick', 'updateContact(' + id + ')');
+            $("#contactModalSuccessBtn").text('Update');
+            $("#contactModalFailBtn").attr('onclick', 'cancelUpdateContact()');
+            $("#contactModalFailBtn").text('Cancel');
             $('#contactModal').modal();
-            repopulateModal(contactId);
+            repopulateModal(id);
         }
 
-        function deleteContact(contactId) {
-            alert("delete");
+        function repopulateModal(id) {
+            $("#number-of-contact").html("#" + id);
+            $("#contact-first-name-div input").val($("#contact_form_" + id + "_firstName").val());
+            $("#contact-last-name-div input").val($("#contact_form_" + id + "_lastName").val());
+            $("#contact-email-div input").val($("#contact_form_" + id + "_email").val());
+            $("#contact-category-div input").val($("#contact_form_" + id + "_category").val());
+            $("#contact-designation-div input").val($("#contact_form_" + id + "_designation").val());
+            $("#contact-mobile-div input").val($("#contact_form_" + id + "_mobile").val());
+            $("#contact-country-div input").val($("#contact_form_" + id + "_country").val());
+            $("#contact-state-div input").val($("#contact_form_" + id + "_state").val());
+            $("#contact-city-div input").val($("#contact_form_" + id + "_city").val());
+            $("#contact-linkedin-div input").val($("#contact_form_" + id + "_linkedin").val());
+            $("#contact-facebook-div input").val($("#contact_form_" + id + "_facebook").val());
+            $("#contact-twitter-div input").val($("#contact_form_" + id + "_twitter").val());
+            $("#contact-address-div input").val($("#contact_form_" + id + "_address").val());
         }
 
-        function repopulateModal(contactId) {
-            $("#contact-first-name-div input").val($("#contact_form_" + contactId + "_firstName").val());
-            $("#contact-last-name-div input").val($("#contact_form_" + contactId + "_lastName").val());
+        function updateContact(id) {
+            $("#contact_form_" + id + "_firstName").val($("#contact-first-name-div input").val());
+            $("#contact_form_" + id + "_lastName").val($("#contact-last-name-div input").val());
+            $("#contact_form_" + id + "_email").val($("#contact-email-div input").val());
+            $("#contact_form_" + id + "_category").val($("#contact-category-div input").val());
+            $("#contact_form_" + id + "_designation").val($("#contact-designation-div input").val());
+            $("#contact_form_" + id + "_mobile").val($("#contact-mobile-div input").val());
+            $("#contact_form_" + id + "_country").val($("#contact-country-div input").val());
+            $("#contact_form_" + id + "_state").val($("#contact-state-div input").val());
+            $("#contact_form_" + id + "_city").val($("#contact-city-div input").val());
+            $("#contact_form_" + id + "_linkedin").val($("#contact-linkedin-div input").val());
+            $("#contact_form_" + id + "_facebook").val($("#contact-facebook-div input").val());
+            $("#contact_form_" + id + "_twitter").val($("#contact-twitter-div input").val());
+            $("#contact_form_" + id + "_address").val($("#contact-address-div input").val());
+            $("#cmplx-btn-" + id + " .cmplx-btn-wrapper").html($("#contact-first-name-div input").val());
+            resetContactForm();
+        }
+
+        function cancelUpdateContact() {
+            resetContactForm();
+        }
+
+        /**
+        Delete Contact Ops
+        */
+        function deleteContact(id) {
+            var result = confirm("Are You Sure?");
+            if(result) {
+                $("#contact_form_" + id + "_firstName").remove();
+                $("#contact_form_" + id + "_lastName").remove();
+                $("#contact_form_" + id + "_email").remove();
+                $("#contact_form_" + id + "_category").remove();
+                $("#contact_form_" + id + "_designation").remove();
+                $("#contact_form_" + id + "_mobile").remove();
+                $("#contact_form_" + id + "_country").remove();
+                $("#contact_form_" + id + "_state").remove();
+                $("#contact_form_" + id + "_city").remove();
+                $("#contact_form_" + id + "_linkedin").remove();
+                $("#contact_form_" + id + "_facebook").remove();
+                $("#contact_form_" + id + "_twitter").remove();
+                $("#contact_form_" + id + "_address").remove();
+                $("#cmplx-btn-" + id).remove();
+                contactId--;
+                if(contactId == 0) {
+                    return;
+                } 
+                shiftContactFieldsInMainForm(id);
+            }
+        }
+
+        function shiftContactFieldsInMainForm(id) {
+            var originalContactId = contactId + 1;
+            var firstName;
+            var lastName;
+            var email;
+            var designation;
+            var category;
+            var mobile;
+            var country;
+            var state;
+            var city;
+            var linkedin;
+            var facebook;
+            var twitter;
+            var address;
+            for(var j = id; j <= originalContactId; j++) {
+                firstName = $("#contact_form_" + (j+1) + "_firstName").val();
+                $("#contact_form_" + (j+1) + "_firstName").attr('id', 'contact_form_' + j + '_firstName');
+                $("#contact_form_" + j + "_firstName").attr('name', 'contact_form_' + j + '_firstName');
+                $("#contact_form_" + j + "_firstName").val(firstName);
+                lastName = $("#contact_form_" + (j+1) + "_lastName").val();
+                $("#contact_form_" + (j+1) + "_lastName").attr('id', 'contact_form_' + j + '_lastName');
+                $("#contact_form_" + j + "_lastName").attr('name', 'contact_form_' + j + '_lastName');
+                $("#contact_form_" + j + "_lastName").val(lastName);
+                email = $("#contact_form_" + (j+1) + "_email").val();
+                $("#contact_form_" + (j+1) + "_email").attr('id', 'contact_form_' + j + '_email');
+                $("#contact_form_" + j + "_email").attr('name', 'contact_form_' + j + '_email');
+                $("#contact_form_" + j + "_email").val(email);
+                category = $("#contact_form_" + (j+1) + "_category").val();
+                $("#contact_form_" + (j+1) + "_category").attr('id', 'contact_form_' + j + '_category');
+                $("#contact_form_" + j + "_category").attr('name', 'contact_form_' + j + '_category');
+                $("#contact_form_" + j + "_category").val(category);
+                designation = $("#contact_form_" + (j+1) + "_designation").val();
+                $("#contact_form_" + (j+1) + "_designation").attr('id', 'contact_form_' + j + '_designation');
+                $("#contact_form_" + j + "_designation").attr('name', 'contact_form_' + j + '_designation');
+                $("#contact_form_" + j + "_designation").val(designation);
+                mobile = $("#contact_form_" + (j+1) + "_mobile").val();
+                $("#contact_form_" + (j+1) + "_mobile").attr('id', 'contact_form_' + j + '_mobile');
+                $("#contact_form_" + j + "_mobile").attr('name', 'contact_form_' + j + '_mobile');
+                $("#contact_form_" + j + "_mobile").val(mobile);
+                country = $("#contact_form_" + (j+1) + "_country").val();
+                $("#contact_form_" + (j+1) + "_country").attr('id', 'contact_form_' + j + '_country');
+                $("#contact_form_" + j + "_country").attr('name', 'contact_form_' + j + '_country');
+                $("#contact_form_" + j + "_country").val(country);
+                state = $("#contact_form_" + (j+1) + "_state").val();
+                $("#contact_form_" + (j+1) + "_state").attr('id', 'contact_form_' + j + '_state');
+                $("#contact_form_" + j + "_state").attr('name', 'contact_form_' + j + '_state');
+                $("#contact_form_" + j + "_state").val(state);
+                city = $("#contact_form_" + (j+1) + "_city").val();
+                $("#contact_form_" + (j+1) + "_city").attr('id', 'contact_form_' + j + '_city');
+                $("#contact_form_" + j + "_city").attr('name', 'contact_form_' + j + '_city');
+                $("#contact_form_" + j + "_city").val(city);
+                linkedin = $("#contact_form_" + (j+1) + "_linkedin").val();
+                $("#contact_form_" + (j+1) + "_linkedin").attr('id', 'contact_form_' + j + '_linkedin');
+                $("#contact_form_" + j + "_linkedin").attr('name', 'contact_form_' + j + '_linkedin');
+                $("#contact_form_" + j + "_linkedin").val(linkedin);
+                facebook = $("#contact_form_" + (j+1) + "_facebook").val();
+                $("#contact_form_" + (j+1) + "_facebook").attr('id', 'contact_form_' + j + '_facebook');
+                $("#contact_form_" + j + "_facebook").attr('name', 'contact_form_' + j + '_facebook');
+                $("#contact_form_" + j + "_facebook").val(facebook);
+                twitter = $("#contact_form_" + (j+1) + "_twitter").val();
+                $("#contact_form_" + (j+1) + "_twitter").attr('id', 'contact_form_' + j + '_twitter');
+                $("#contact_form_" + j + "_twitter").attr('name', 'contact_form_' + j + '_twitter');
+                $("#contact_form_" + j + "_twitter").val(twitter);
+                address = $("#contact_form_" + (j+1) + "_address").val();
+                $("#contact_form_" + (j+1) + "_address").attr('id', 'contact_form_' + j + '_address');
+                $("#contact_form_" + j + "_address").attr('name', 'contact_form_' + j + '_address');
+                $("#contact_form_" + j + "_address").val(address);
+            }
         }
         
     </script>
