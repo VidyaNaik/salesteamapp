@@ -78,9 +78,7 @@ body {
 }
 
 .modal-mod {
-    width: 80% !important;
-    height: 500px;
-    overflow-y: scroll;
+    width: 90% !important;
 }
 
 .menu-bar {
