@@ -523,10 +523,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     countryId: countryId
                 },
                 success: function(response) {
+                    var optionsBuilder = "<option value=''>Select State</option>";
                     if(response.length == 0) {
+                        $("#contact-state-div select").html(optionsBuilder);
                         return;
                     }
-                    var optionsBuilder = "<option value=''>Select State</option>";
+                    
                     for(var i=0; i<response.length; i++) {
                         optionsBuilder += "<option value='" + response[i].id + "'>";
                         optionsBuilder += response[i].name;
