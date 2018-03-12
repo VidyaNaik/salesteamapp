@@ -20,6 +20,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASEURL; ?>assets/css/styles.css" />
     <script src="<?php echo BASEURL; ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo BASEURL; ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo BASEURL; ?>assets/js/admin/addClientCompanyValidation.js"></script>
+    <script src="<?php echo BASEURL; ?>assets/js/admin/addClientContactValidation.js"></script>
 </head>
 <body>
     <?php include 'navbar.php';?>
@@ -45,43 +47,43 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="companyName" id="companyName" placeholder="Enter Company Name" class="form-control" onfocusout="">
+                                        <input type="text" name="companyName" id="companyName" placeholder="Enter Company Name" class="form-control" onfocusout="validateCompanyName()">
                                         <p id="companyNameErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Website</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="companyWebsite" id="companyWebsite" placeholder="Enter Company Website" class="form-control" onfocusout="">
+                                        <input type="text" name="companyWebsite" id="companyWebsite" placeholder="Enter Company Website" class="form-control" onfocusout="validateCompanyWebsite()">
                                         <p id="companyWebsiteErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Phone</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="companyPhone" id="companyPhone" placeholder="Enter Company Phone" class="form-control" onfocusout="">
+                                        <input type="text" name="companyPhone" id="companyPhone" placeholder="Enter Company Phone" class="form-control" onfocusout="validateCompanyPhone()">
                                         <p id="companyPhoneErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company E-Mail</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="companyEmail" id="companyEmail" placeholder="Enter Company Email" class="form-control" onfocusout="">
+                                        <input type="text" name="companyEmail" id="companyEmail" placeholder="Enter Company Email" class="form-control" onfocusout="validateCompanyEmail()">
                                         <p id="companyEmailErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company LinkedIn</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="companyLinkedIn" id="companyLinkedIn" placeholder="Enter Company LinkedIn" class="form-control" onfocusout="">
+                                        <input type="text" name="companyLinkedIn" id="companyLinkedIn" placeholder="Enter Company LinkedIn" class="form-control" onfocusout="validateCompanyLinkedIn()">
                                         <p id="companyLinkedInErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Address</label>
                                     <div class="col-sm-9">
-                                        <textarea name="companyAddress" id="companyAddress" placeholder="Enter Company Address" class="form-control" style="resize: none;" onfocusout=""></textarea>
-                                        <p id="companyWebsiteErrMsg"></p>
+                                        <textarea name="companyAddress" id="companyAddress" placeholder="Enter Company Address" class="form-control" style="resize: none;" onfocusout="validateCompanyAddress()"></textarea>
+                                        <p id="companyAddressErrMsg"></p>
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
@@ -109,7 +111,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         <div class="modal-dialog modal-mod">
             <div class="modal-content">
                 <div class="modal-header modal-header-mod">
-                    <h4 class="modal-title">Add Contact <span id="number-of-contact"></span></h4>
+                    <h4 class="modal-title">Contact Form</h4>
                 </div>
                 <div class="modal-body">
                     <form id="addContactForm" class="form-horizontal">
@@ -118,7 +120,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-first-name-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">First Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter First Name" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter First Name" class="form-control" onfocusout="validateContactFirstName()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -127,7 +129,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-last-name-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Last Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Last Name" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Last Name" class="form-control" onfocusout="validateContactLastName()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -138,7 +140,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-email-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">E-Mail</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter E-Mail Address" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter E-Mail Address" class="form-control" onfocusout="validateContactEmail()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -147,7 +149,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-category-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Category</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Category" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Category" class="form-control" onfocusout="validateContactCategory()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -158,7 +160,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-designation-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Designation</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Designation" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Designation" class="form-control" onfocusout="validateContactDesignation()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -167,7 +169,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-mobile-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Mobile</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Mobile" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Mobile" class="form-control" onfocusout="validateContactMobile()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -178,7 +180,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-country-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Country</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Country" class="form-control" onfocusout="">
+                                        <select class="form-control" onfocusout="validateContactCountry()">
+                                            <option value="">Choose Country</option>
+                                        </select>
                                         <p></p>
                                     </div>
                                 </div>
@@ -187,7 +191,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-state-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">State</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter State" class="form-control" onfocusout="">
+                                        <select class="form-control" onfocusout="validateContactState()">
+                                            <option value="">Choose State</option>
+                                        </select>
                                         <p></p>
                                     </div>
                                 </div>
@@ -198,7 +204,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-city-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">City</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter City" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter City" class="form-control" onfocusout="validateContactCity()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -207,7 +213,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-linkedin-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">LinkedIn</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter LinkedIn" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter LinkedIn" class="form-control" onfocusout="validateContactLinkedIn()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -218,7 +224,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-facebook-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Facebook</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Facebook" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Facebook" class="form-control" onfocusout="validateContactFacebook()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -227,7 +233,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-twitter-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Twitter</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter Twitter" class="form-control" onfocusout="">
+                                        <input type="text" placeholder="Enter Twitter" class="form-control" onfocusout="validateContactTwitter()">
                                         <p></p>
                                     </div>
                                 </div>
@@ -238,7 +244,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-address-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Address</label>
                                     <div class="col-sm-9">
-                                        <textarea placeholder="Enter Address" class="form-control" style="resize: none;" onfocusout=""></textarea>
+                                        <textarea placeholder="Enter Address" class="form-control" style="resize: none;" onfocusout="validateContactAddress()"></textarea>
                                         <p></p>
                                     </div>
                                 </div>
@@ -250,8 +256,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </form>
                 </div>
                 <div class="modal-footer modal-footer-mod">
-                    <button id="contactModalSuccessBtn" type="button" class="btn btn-primary action-btn btn-identical-dimension"></button>
-                    <button id="contactModalFailBtn" type="button" class="btn btn-danger action-btn btn-identical-dimension"></button>
+                    <button id="contactModalSuccessBtn" type="button" class="btn btn-primary form-btn btn-identical-dimension"></button>
+                    <button id="contactModalFailBtn" type="button" class="btn btn-danger form-btn btn-identical-dimension"></button>
                 </div>
             </div>
         </div>
@@ -261,55 +267,66 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         var contactId = 0;
 
         function showContactForm() {
-            //$("#number-of-contact").html("#" + contactId);
             $("#contactModalSuccessBtn").attr('onclick', 'addContactFieldsToMainForm()');
             $("#contactModalSuccessBtn").text('Add');
             $("#contactModalFailBtn").attr('onclick', 'cancelContact()');
             $("#contactModalFailBtn").text('Cancel');
             $("#contactModal").modal();
+            loadCountriesIntoContactForm();
         }
 
         function cancelContact() {
-            resetContactForm();
+            addContactFormReset();
+            $('#contactModal').modal('toggle');
         }
 
-        function resetContactForm() {
-            $("#contact-first-name-div input").val('');
-            $("#contact-last-name-div input").val('');
-            $("#contact-email-div input").val('');
-            $("#contact-category-div input").val('');
-            $("#contact-designation-div input").val('');
-            $("#contact-mobile-div input").val('');
-            $("#contact-country-div input").val('');
-            $("#contact-state-div input").val('');
-            $("#contact-city-div input").val('');
-            $("#contact-linkedin-div input").val('');
-            $("#contact-facebook-div input").val('');
-            $("#contact-twitter-div input").val('');
-            $("#contact-address-div textarea").val('');
-            $('#contactModal').modal('toggle');
+        function validateContactFields() {
+            validateContactFirstName();
+            validateContactLastName();
+            validateContactEmail();
+            validateContactCategory();
+            validateContactDesignation();
+            validateContactMobile();
+            validateContactCountry();
+            validateContactState();
+            validateContactCity();
+            validateContactLinkedIn();
+            validateContactFacebook();
+            validateContactTwitter();
+            validateContactAddress();
+            if(contactFirstNameErrFlag == false && contactLastNameErrFlag == false && contactEmailErrFlag == false && 
+                contactCategoryErrFlag == false && contactDesignationErrFlag == false && contactMobileErrFlag == false &&
+                    contactCountryErrFlag == false && contactStateErrFlag == false && contactCityErrFlag == false && 
+                        contactLinkedInErrFlag == false && contactFacebookErrFlag == false && contactTwitterErrFlag == false &&
+                            contactAddressErrFlag == false) {
+                                return true;
+                            }
+                            return false;          
         }
 
         /**
         Note: Main form is addClientForm 
         */
         function addContactFieldsToMainForm() {
-            contactId++;
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_firstName'  name='contact_form_" + contactId + "_firstName' value='" + $("#contact-first-name-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_lastName' name='contact_form_" + contactId + "_lastName' value='" + $("#contact-last-name-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_email' name='contact_form_" + contactId + "_email' value='" + $("#contact-email-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_category' name='contact_form_" + contactId + "_category' value='" + $("#contact-category-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_designation' name='contact_form_" + contactId + "_designation' value='" + $("#contact-designation-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_mobile' name='contact_form_" + contactId + "_mobile' value='" + $("#contact-mobile-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_country' name='contact_form_" + contactId + "_country' value='" + $("#contact-country-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_state' name='contact_form_" + contactId + "_state' value='" + $("#contact-state-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_city' name='contact_form_" + contactId + "_city' value='" + $("#contact-city-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_linkedin' name='contact_form_" + contactId + "_linkedin' value='" + $("#contact-linkedin-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_facebook' name='contact_form_" + contactId + "_facebook' value='" + $("#contact-facebook-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_twitter' name='contact_form_" + contactId + "_twitter' value='" + $("#contact-twitter-div input").val() + "'>");
-            $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_address' name='contact_form_" + contactId + "_address' value='" + $("#contact-address-div input").val() + "'>");
-            $('#client-contact-pool').prepend("<div id='cmplx-btn-" + contactId + "' class='cmplx-btn btn btn-success form-btn'><div title='Edit Contact' class='cmplx-btn-wrapper' onclick='editContact(" + contactId + ")'>" + $("#contact-first-name-div input").val() + "</div><div class='cmplx-options-wrapper'><span title='Remove Contact' class='glyphicon glyphicon-remove' onclick='deleteContact(" + contactId + ")'></span></div></div>");
-            resetContactForm();
+            if(validateContactFields()) {
+                contactId++;
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_firstName'  name='contact_form_" + contactId + "_firstName' value='" + $("#contact-first-name-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_lastName' name='contact_form_" + contactId + "_lastName' value='" + $("#contact-last-name-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_email' name='contact_form_" + contactId + "_email' value='" + $("#contact-email-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_category' name='contact_form_" + contactId + "_category' value='" + $("#contact-category-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_designation' name='contact_form_" + contactId + "_designation' value='" + $("#contact-designation-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_mobile' name='contact_form_" + contactId + "_mobile' value='" + $("#contact-mobile-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_country' name='contact_form_" + contactId + "_country' value='" + $("#contact-country-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_state' name='contact_form_" + contactId + "_state' value='" + $("#contact-state-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_city' name='contact_form_" + contactId + "_city' value='" + $("#contact-city-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_linkedin' name='contact_form_" + contactId + "_linkedin' value='" + $("#contact-linkedin-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_facebook' name='contact_form_" + contactId + "_facebook' value='" + $("#contact-facebook-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_twitter' name='contact_form_" + contactId + "_twitter' value='" + $("#contact-twitter-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_address' name='contact_form_" + contactId + "_address' value='" + $("#contact-address-div input").val() + "'>");
+                $('#client-contact-pool').prepend("<div id='cmplx-btn-" + contactId + "' class='cmplx-btn btn btn-success form-btn'><div title='Edit Contact' class='cmplx-btn-wrapper' onclick='editContact(" + contactId + ")'>" + $("#contact-first-name-div input").val() + "</div><div class='cmplx-options-wrapper'><span title='Remove Contact' class='glyphicon glyphicon-remove' onclick='deleteContact(" + contactId + ")'></span></div></div>");
+                addContactFormReset();
+                $('#contactModal').modal('toggle');
+            }
         }
 
         /**
@@ -325,7 +342,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         }
 
         function repopulateModal(id) {
-            $("#number-of-contact").html("#" + id);
             $("#contact-first-name-div input").val($("#contact_form_" + id + "_firstName").val());
             $("#contact-last-name-div input").val($("#contact_form_" + id + "_lastName").val());
             $("#contact-email-div input").val($("#contact_form_" + id + "_email").val());
@@ -342,25 +358,29 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         }
 
         function updateContact(id) {
-            $("#contact_form_" + id + "_firstName").val($("#contact-first-name-div input").val());
-            $("#contact_form_" + id + "_lastName").val($("#contact-last-name-div input").val());
-            $("#contact_form_" + id + "_email").val($("#contact-email-div input").val());
-            $("#contact_form_" + id + "_category").val($("#contact-category-div input").val());
-            $("#contact_form_" + id + "_designation").val($("#contact-designation-div input").val());
-            $("#contact_form_" + id + "_mobile").val($("#contact-mobile-div input").val());
-            $("#contact_form_" + id + "_country").val($("#contact-country-div input").val());
-            $("#contact_form_" + id + "_state").val($("#contact-state-div input").val());
-            $("#contact_form_" + id + "_city").val($("#contact-city-div input").val());
-            $("#contact_form_" + id + "_linkedin").val($("#contact-linkedin-div input").val());
-            $("#contact_form_" + id + "_facebook").val($("#contact-facebook-div input").val());
-            $("#contact_form_" + id + "_twitter").val($("#contact-twitter-div input").val());
-            $("#contact_form_" + id + "_address").val($("#contact-address-div input").val());
-            $("#cmplx-btn-" + id + " .cmplx-btn-wrapper").html($("#contact-first-name-div input").val());
-            resetContactForm();
+            if(validateContactFields()) {
+                $("#contact_form_" + id + "_firstName").val($("#contact-first-name-div input").val());
+                $("#contact_form_" + id + "_lastName").val($("#contact-last-name-div input").val());
+                $("#contact_form_" + id + "_email").val($("#contact-email-div input").val());
+                $("#contact_form_" + id + "_category").val($("#contact-category-div input").val());
+                $("#contact_form_" + id + "_designation").val($("#contact-designation-div input").val());
+                $("#contact_form_" + id + "_mobile").val($("#contact-mobile-div input").val());
+                $("#contact_form_" + id + "_country").val($("#contact-country-div input").val());
+                $("#contact_form_" + id + "_state").val($("#contact-state-div input").val());
+                $("#contact_form_" + id + "_city").val($("#contact-city-div input").val());
+                $("#contact_form_" + id + "_linkedin").val($("#contact-linkedin-div input").val());
+                $("#contact_form_" + id + "_facebook").val($("#contact-facebook-div input").val());
+                $("#contact_form_" + id + "_twitter").val($("#contact-twitter-div input").val());
+                $("#contact_form_" + id + "_address").val($("#contact-address-div input").val());
+                $("#cmplx-btn-" + id + " .cmplx-btn-wrapper").html($("#contact-first-name-div input").val());
+                addContactFormReset();
+                $('#contactModal').modal('toggle');
+            }
         }
 
         function cancelUpdateContact() {
-            resetContactForm();
+            addContactFormReset();
+            $('#contactModal').modal('toggle');
         }
 
         /**
@@ -460,8 +480,63 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 $("#contact_form_" + j + "_address").attr('name', 'contact_form_' + j + '_address');
                 $("#contact_form_" + j + "_address").val(address);
             }
+        }  
+
+        /**
+         * Load AJAX data
+         */
+
+        $(document).ready(function() {
+            $("#contact-country-div select").change(function() {
+                loadStatesForCountry($("#contact-country-div select").val());
+            });
+        });
+
+        function loadCountriesIntoContactForm() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchlocation.php",
+                data: {
+                    locationType: "country"
+                },
+                success: function(response) {
+                    if(response.length == 0) {
+                        return;
+                    }
+                    var optionsBuilder = "<option value=''>Select Country</option>";
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    $("#contact-country-div select").html(optionsBuilder);
+                }
+            });
         }
         
+        function loadStatesForCountry(countryId) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchlocation.php",
+                data: {
+                    locationType: "state",
+                    countryId: countryId
+                },
+                success: function(response) {
+                    if(response.length == 0) {
+                        return;
+                    }
+                    var optionsBuilder = "<option value=''>Select State</option>";
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    $("#contact-state-div select").html(optionsBuilder);
+                }
+            });
+        }
+
     </script>
 </body>
 </html>
