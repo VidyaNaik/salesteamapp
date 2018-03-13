@@ -26,7 +26,7 @@ if(validateDetails($company)) {
     if($clientService->checkWebsite($companyWebsite)) {
         $max_client_company_id = $clientService->saveCompany($company);
         if($clientTotalContacts > 0) {
-            setContactDetails($max_client_company_id);
+            setContactDetails($max_client_company_id); 
             saveContactDetails();
         }
         $_SESSION['serverMsg'] = "Client Added Successfully!";
