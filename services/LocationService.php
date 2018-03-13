@@ -140,4 +140,22 @@ class LocationService {
         return $listOfStates;
     }
 
+    public function getAllCitiesByStateId($stateId) {
+        $stmt = $this->connection->prepare("select * from cities where state_id = ?");
+        $stmt->bind_param("i", $stateId);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $listOfCities = array();
+        while($row = $res->fetch_assoc()) {
+            $city = new City();
+            $city->setId($row['city_id']);
+            $city->setName($row['city_name']);
+            $city->setState($row['state_id']);
+            $city->setCountry($row['country_id']);
+            array_push($listOfCities, $city);
+        }
+        $stmt->close();
+        return $listOfCities;
+    }
+
 }

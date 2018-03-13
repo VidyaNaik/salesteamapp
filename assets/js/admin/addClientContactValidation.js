@@ -159,7 +159,7 @@ function validateContactState() {
 }
 
 function validateContactCity() {
-    var inputElement = $("#contact-city-div input");
+    var inputElement = $("#contact-city-div select");
     var errorElement = $("#contact-city-div p");
     contactCity = inputElement.val();
     contactCityErrFlag = false;
@@ -295,11 +295,11 @@ function addContactFormResetErrOnForm() {
     $("#contact-mobile-div input").val("");
     $("#contact-country-div select").val("");
     $("#contact-state-div select").val("");
-    $("#contact-city-div input").val("");
+    $("#contact-city-div select").val("");
     $("#contact-linkedin-div input").val("");
     $("#contact-facebook-div input").val("");
     $("#contact-twitter-div input").val("");
-    $("#contact-address-div input").val("");
+    $("#contact-address-div textarea").val("");
 
     $("#contact-first-name-div input").css({"border-color":"#ccc"});
     $("#contact-last-name-div input").css({"border-color":"#ccc"});
@@ -309,7 +309,7 @@ function addContactFormResetErrOnForm() {
     $("#contact-mobile-div input").css({"border-color":"#ccc"});
     $("#contact-country-div select").css({"border-color":"#ccc"});
     $("#contact-state-div select").css({"border-color":"#ccc"});
-    $("#contact-city-div input").css({"border-color":"#ccc"});
+    $("#contact-city-div select").css({"border-color":"#ccc"});
     $("#contact-linkedin-div input").css({"border-color":"#ccc"});
     $("#contact-facebook-div input").css({"border-color":"#ccc"});
     $("#contact-twitter-div input").css({"border-color":"#ccc"});

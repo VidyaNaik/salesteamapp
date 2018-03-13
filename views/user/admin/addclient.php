@@ -43,7 +43,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <form id="addClientForm" class="form-horizontal" action="" method="post">
+                            <form id="addClientForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/admin/performaddclient.php" method="post">
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Name</label>
                                     <div class="col-sm-9">
@@ -94,9 +94,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                         </div>
                                     </div>
                                 </div>
+                                <input type='hidden' id='clientTotalContacts' name='clientTotalContacts' value="0">
                                 <div class="form-group form-group-mod"> 
                                     <div class="col-sm-12 text-center">
-                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addClientFormValidation()">Save</button>
+                                        <button id="add-btn" type="submit" class="btn btn-primary form-btn" onclick="addClientFormValidation()">Save</button>
                                         <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="addClientFormReset()">Clear</button>
                                     </div>
                                 </div>
@@ -181,7 +182,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                     <label class="control-label col-sm-3">Country</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" onfocusout="validateContactCountry()">
-                                            <option value="">Choose Country</option>
+                                            <option value="">Select Country</option>
                                         </select>
                                         <p></p>
                                     </div>
@@ -192,7 +193,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                     <label class="control-label col-sm-3">State</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" onfocusout="validateContactState()">
-                                            <option value="">Choose State</option>
+                                            <option value="">Select State</option>
                                         </select>
                                         <p></p>
                                     </div>
@@ -204,7 +205,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <div id="contact-city-div" class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">City</label>
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Enter City" class="form-control" onfocusout="validateContactCity()">
+                                        <select class="form-control" onfocusout="validateContactCity()">
+                                            <option value="">Select City</option>
+                                        </select>
                                         <p></p>
                                     </div>
                                 </div>
@@ -310,19 +313,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         function addContactFieldsToMainForm() {
             if(validateContactFields()) {
                 contactId++;
+                $('#clientTotalContacts').val(contactId);
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_firstName'  name='contact_form_" + contactId + "_firstName' value='" + $("#contact-first-name-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_lastName' name='contact_form_" + contactId + "_lastName' value='" + $("#contact-last-name-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_email' name='contact_form_" + contactId + "_email' value='" + $("#contact-email-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_category' name='contact_form_" + contactId + "_category' value='" + $("#contact-category-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_designation' name='contact_form_" + contactId + "_designation' value='" + $("#contact-designation-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_mobile' name='contact_form_" + contactId + "_mobile' value='" + $("#contact-mobile-div input").val() + "'>");
-                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_country' name='contact_form_" + contactId + "_country' value='" + $("#contact-country-div input").val() + "'>");
-                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_state' name='contact_form_" + contactId + "_state' value='" + $("#contact-state-div input").val() + "'>");
-                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_city' name='contact_form_" + contactId + "_city' value='" + $("#contact-city-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_country' name='contact_form_" + contactId + "_country' value='" + $("#contact-country-div select").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_state' name='contact_form_" + contactId + "_state' value='" + $("#contact-state-div select").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_city' name='contact_form_" + contactId + "_city' value='" + $("#contact-city-div select").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_linkedin' name='contact_form_" + contactId + "_linkedin' value='" + $("#contact-linkedin-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_facebook' name='contact_form_" + contactId + "_facebook' value='" + $("#contact-facebook-div input").val() + "'>");
                 $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_twitter' name='contact_form_" + contactId + "_twitter' value='" + $("#contact-twitter-div input").val() + "'>");
-                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_address' name='contact_form_" + contactId + "_address' value='" + $("#contact-address-div input").val() + "'>");
+                $('#addClientForm').append("<input type='hidden' id='contact_form_" + contactId + "_address' name='contact_form_" + contactId + "_address' value='" + $("#contact-address-div textarea").val() + "'>");
                 $('#client-contact-pool').prepend("<div id='cmplx-btn-" + contactId + "' class='cmplx-btn btn btn-success form-btn'><div title='Edit Contact' class='cmplx-btn-wrapper' onclick='editContact(" + contactId + ")'>" + $("#contact-first-name-div input").val() + "</div><div class='cmplx-options-wrapper'><span title='Remove Contact' class='glyphicon glyphicon-remove' onclick='deleteContact(" + contactId + ")'></span></div></div>");
                 addContactFormReset();
                 $('#contactModal').modal('toggle');
@@ -348,13 +352,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             $("#contact-category-div input").val($("#contact_form_" + id + "_category").val());
             $("#contact-designation-div input").val($("#contact_form_" + id + "_designation").val());
             $("#contact-mobile-div input").val($("#contact_form_" + id + "_mobile").val());
-            $("#contact-country-div input").val($("#contact_form_" + id + "_country").val());
-            $("#contact-state-div input").val($("#contact_form_" + id + "_state").val());
-            $("#contact-city-div input").val($("#contact_form_" + id + "_city").val());
+            $("#contact-country-div select").val($("#contact_form_" + id + "_country").val());
+            $("#contact-state-div select").val($("#contact_form_" + id + "_state").val());
+            $("#contact-city-div select").val($("#contact_form_" + id + "_city").val());
             $("#contact-linkedin-div input").val($("#contact_form_" + id + "_linkedin").val());
             $("#contact-facebook-div input").val($("#contact_form_" + id + "_facebook").val());
             $("#contact-twitter-div input").val($("#contact_form_" + id + "_twitter").val());
-            $("#contact-address-div input").val($("#contact_form_" + id + "_address").val());
+            $("#contact-address-div textarea").val($("#contact_form_" + id + "_address").val());
         }
 
         function updateContact(id) {
@@ -365,13 +369,13 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 $("#contact_form_" + id + "_category").val($("#contact-category-div input").val());
                 $("#contact_form_" + id + "_designation").val($("#contact-designation-div input").val());
                 $("#contact_form_" + id + "_mobile").val($("#contact-mobile-div input").val());
-                $("#contact_form_" + id + "_country").val($("#contact-country-div input").val());
-                $("#contact_form_" + id + "_state").val($("#contact-state-div input").val());
-                $("#contact_form_" + id + "_city").val($("#contact-city-div input").val());
+                $("#contact_form_" + id + "_country").val($("#contact-country-div select").val());
+                $("#contact_form_" + id + "_state").val($("#contact-state-div select").val());
+                $("#contact_form_" + id + "_city").val($("#contact-city-div select").val());
                 $("#contact_form_" + id + "_linkedin").val($("#contact-linkedin-div input").val());
                 $("#contact_form_" + id + "_facebook").val($("#contact-facebook-div input").val());
                 $("#contact_form_" + id + "_twitter").val($("#contact-twitter-div input").val());
-                $("#contact_form_" + id + "_address").val($("#contact-address-div input").val());
+                $("#contact_form_" + id + "_address").val($("#contact-address-div textarea").val());
                 $("#cmplx-btn-" + id + " .cmplx-btn-wrapper").html($("#contact-first-name-div input").val());
                 addContactFormReset();
                 $('#contactModal').modal('toggle');
@@ -404,6 +408,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 $("#contact_form_" + id + "_address").remove();
                 $("#cmplx-btn-" + id).remove();
                 contactId--;
+                $('#clientTotalContacts').val(contactId);
                 if(contactId == 0) {
                     return;
                 } 
@@ -488,7 +493,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
         $(document).ready(function() {
             $("#contact-country-div select").change(function() {
-                loadStatesForCountry($("#contact-country-div select").val());
+                if($("#contact-country-div select").val() !== "") {
+                    loadStatesForCountry($("#contact-country-div select").val());
+                    return;
+                }
+                var optionsBuilder = "<option value=''>Select State</option>";
+                $("#contact-state-div select").html(optionsBuilder);
+                optionsBuilder = "<option value=''>Select City</option>";
+                $("#contact-city-div select").html(optionsBuilder);
+                    
+            });
+            $("#contact-state-div select").change(function() {
+                if($("#contact-state-div select").val() !== "") {
+                    loadCitiesForState($("#contact-state-div select").val());
+                    return;
+                }
+                var optionsBuilder = "<option value=''>Select City</option>";
+                $("#contact-city-div select").html(optionsBuilder);
+                    
             });
         });
 
@@ -528,13 +550,36 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                         $("#contact-state-div select").html(optionsBuilder);
                         return;
                     }
-                    
                     for(var i=0; i<response.length; i++) {
                         optionsBuilder += "<option value='" + response[i].id + "'>";
                         optionsBuilder += response[i].name;
                         optionsBuilder += "</option>";
                     }
                     $("#contact-state-div select").html(optionsBuilder);
+                }
+            });
+        }
+
+        function loadCitiesForState(stateId) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchlocation.php",
+                data: {
+                    locationType: "city",
+                    stateId: stateId
+                },
+                success: function(response) {
+                    var optionsBuilder = "<option value=''>Select City</option>";
+                    if(response.length == 0) {
+                        $("#contact-city-div select").html(optionsBuilder);
+                        return;
+                    }
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    $("#contact-city-div select").html(optionsBuilder);
                 }
             });
         }
