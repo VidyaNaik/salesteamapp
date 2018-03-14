@@ -32,16 +32,16 @@
                     </ul>
                 </li>
                 <?php endif; ?>
+                <!--Admin And BDE Access Only -->
+                <?php if ($_SESSION['role'] == "ADMIN") : ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <!--Admin And BDE Access Only -->
-                        <?php if ($_SESSION['role'] == "ADMIN" || $_SESSION['role'] == "BDE") : ?>
                         <li><a href="addclient.php">Add Client</a></li>
-                        <?php endif; ?>
-                        <li><a href="../clientlist.php">Client List</a></li>
+                        <li><a href="clientlist.php">Client List</a></li>
                     </ul>
                 </li>
+                <?php endif; ?>
                 <!-- Admin Access Only -->
                 <?php if ($_SESSION['role'] == "ADMIN") : ?>
                     <li><a href="addlocation.php">Add Location</a></li>

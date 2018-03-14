@@ -4,6 +4,7 @@ if(!isset($_SESSION["email"])) {
     header("Location:../login.php");
 }
 
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/ClientService.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Company.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
@@ -11,6 +12,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
 $clientService = new ClientService();
 $company = new Company();
 $contacts = array();
+$errContacts= array();
 
 $companyName = $_POST["companyName"];
 $companyWebsite = $_POST["companyWebsite"];
@@ -21,16 +23,22 @@ $companyLinkedIn = $_POST["companyLinkedIn"];
 $clientTotalContacts = $_POST["clientTotalContacts"];
 setCompanyDetails();
 
-if(validateDetails($company)) {
+if(validateCompanyDetails()) {
     global $clientTotalContacts;
-    if($clientService->checkWebsite($companyWebsite)) {
+    if($clientService->checkCompanyWebsite($companyWebsite)) {
         $max_client_company_id = $clientService->saveCompany($company);
         if($clientTotalContacts > 0) {
             setContactDetails($max_client_company_id); 
             saveContactDetails();
+            if(count($errContacts) > 0) {
+                $_SESSION['serverMsg'] = "Client Added Successfully But Some Contacts Were Not Added!";
+                $_SESSION['serverData'] = $errContacts;
+                header("Location:../../views/user/admin/failedcontacts.php");
+                exit;
+            }
         }
         $_SESSION['serverMsg'] = "Client Added Successfully!";
-        header("Location:../../views/user/clientlist.php");
+        header("Location:../../views/user/admin/clientlist.php");
     } else {
         $_SESSION['serverMsg'] = "Client With This Website Is Already Uploaded";
         header("Location:../../views/user/admin/addclient.php");
@@ -52,7 +60,8 @@ function setCompanyDetails() {
     $company->setLinkedin($GLOBALS['companyLinkedIn']);
 }
 
-function validateDetails($company) {
+function validateCompanyDetails() {
+    global $company;
     if($company->getName() == "" || $company->getWebsite() == "" || 
         $company->getAddress() == "" || $company->getPhone() == "" || 
             $company->getEmail() == "" || $company->getLinkedIn() == "") {
@@ -87,15 +96,36 @@ function setContactDetails($client_company_id) {
         $contact->setLinkedIn($_POST['contact_form_'.$i.'_linkedin']);
         $contact->setFacebook($_POST['contact_form_'.$i.'_facebook']);
         $contact->setTwitter($_POST['contact_form_'.$i.'_twitter']);
-        $contact->setStatus("NEW");
-        $contact->setAdded(date("Y-m-d H:i:s"));
         $contact->setCompany($client_company_id);
         array_push($contacts, $contact);
     }
 }
 
 function saveContactDetails() {
-    global $contacts;
+    global $clientTotalContacts, $contacts, $errContacts, $clientService;
+    for($i = 0; $i < $clientTotalContacts; $i++) {
+        $contactValidityStatus = validateContactDetails($contacts[$i]);
+        if($contactValidityStatus === true) {
+            if($clientService->checkContactEmail($contacts[$i]->getEmail())) {
+                $clientService->saveContact($contacts[$i]);
+            } else {
+                array_push($errContacts, array("errContact"=>$contacts[$i], "errMsg"=>ERR_CONTACT_EXISTS));
+            }
+        } else {
+            array_push($errContacts, array("errContact"=>$contacts[$i], "errMsg"=>$contactValidityStatus));
+        }   
+    }
+}
+
+function validateContactDetails($contact) {
+    if($contact->getFirstName() == "" || $contact->getLastName() == "" || $contact->getEmail() == "" || 
+        $contact->getCategory() == "" || $contact->getDesignation() == "" || $contact->getMobile() == "" || 
+            $contact->getCity() == "" || $contact->getState() == "" || $contact->getCountry() == "" || 
+                $contact->getAddress() == "" || $contact->getLinkedIn() == "" || $contact->getFacebook() == "" || 
+                    $contact->getTwitter() == "") {
+                        return ERR_BLANK;
+                    }
+                    return true;
 }
 
 ?>
