@@ -57,7 +57,7 @@ function setCompanyDetails() {
     $company->setAddress($GLOBALS['companyAddress']);
     $company->setPhone($GLOBALS['companyPhone']);
     $company->setEmail($GLOBALS['companyEmail']);
-    $company->setLinkedin($GLOBALS['companyLinkedIn']);
+    $company->setLinkedIn($GLOBALS['companyLinkedIn']);
 }
 
 function validateCompanyDetails() {
@@ -67,11 +67,11 @@ function validateCompanyDetails() {
             $company->getEmail() == "" || $company->getLinkedIn() == "") {
         $_SESSION['serverMsg'] = "One Or More Fields Are Blank!";
         return false;
-    } else if((strrpos($company->getName()," ") !== false) || (strrpos($company->getWebsite()," ") !== false) || 
-        (strrpos($company->getAddress()," ") !== false) || (strrpos($company->getPhone()," ") !== false) ||
-        (strrpos($company->getEmail()," ") !== false) || (strrpos($company->getLinkedIn()," ") !== false)) {
-        $_SESSION['serverMsg'] = "Whitespaces Are Not Allowed!";
-        return false;
+    } else if((strrpos($company->getWebsite()," ") !== false) || (strrpos($company->getAddress()," ") !== false) || 
+                (strrpos($company->getPhone()," ") !== false) || (strrpos($company->getEmail()," ") !== false) || 
+                    (strrpos($company->getLinkedIn()," ") !== false)) {
+                        $_SESSION['serverMsg'] = "Whitespaces Are Not Allowed!";
+                        return false;
     }
     return true;
 }

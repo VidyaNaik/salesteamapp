@@ -1,4 +1,5 @@
 var whiteSpaceRegEx = /\s/g;
+var alphabetsWithWhiteSpaceRegEx = /\w+/g;
 var websiteRegEx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/g;
 var phoneRegEx = /^\d{10}$/;
 var emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -30,7 +31,7 @@ function validateCompanyName() {
         companyNameErrFlag = true;
         companyNameErrMsg = "Company Name Is Required !";
         $("#companyName").css({"border-color":"red"});
-    } else if(companyName.match(whiteSpaceRegEx)) {
+    } else if(!companyName.match(alphabetsWithWhiteSpaceRegEx)) {
         companyNameErrFlag = true;
         companyNameErrMsg = "Whitespace Is Not Allowed !";
         $("#companyName").css({"border-color":"red"});
@@ -75,6 +76,7 @@ function validateCompanyPhone() {
     } else if(!companyPhone.match(phoneRegEx)) {
         companyPhoneErrFlag = true;
         companyPhoneErrMsg = "Phone Number Format Is Not Valid !";
+        $("#companyPhone").css({"border-color":"red"});
     }
     $("#companyPhoneErrMsg").text(companyPhoneErrMsg);
 }
@@ -95,6 +97,7 @@ function validateCompanyEmail() {
     } else if(!companyEmail.match(emailRegEx)) {
         companyEmailErrFlag = true;
         companyEmailErrMsg = "E-Mail Format Is Not Valid !";
+        $("#companyPhone").css({"border-color":"red"});
     }
     $("#companyEmailErrMsg").text(companyEmailErrMsg);
 }

@@ -1,3 +1,7 @@
+var whiteSpaceRegEx = /\s/g;
+var alphabetsWithWhiteSpaceRegEx = /\w+/g;
+var phoneRegEx = /^\d{10}$/;
+var emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 contactFirstName = "";
 contactFirstNameErrFlag = true;
 contactFirstNameErrMsg = "";
@@ -49,6 +53,10 @@ function validateContactFirstName() {
         contactFirstNameErrFlag = true;
         contactFirstNameErrMsg = "First Name Is Required !";
         inputElement.css({"border-color":"red"});
+    } else if(contactFirstName.match(whiteSpaceRegEx)) {
+        contactFirstNameErrFlag = true;
+        contactFirstNameErrMsg = "Whitespace Is Not Allowed !";
+        inputElement.css({"border-color":"red"});
     }
     errorElement.text(contactFirstNameErrMsg);
 }
@@ -64,6 +72,10 @@ function validateContactLastName() {
         contactLastNameErrFlag = true;
         contactLastNameErrMsg = "Last Name Is Required !";
         inputElement.css({"border-color":"red"});
+    } else if(contactLastName.match(whiteSpaceRegEx)) {
+        contactLastNameErrFlag = true;
+        contactLastNameErrMsg = "Whitespace Is Not Allowed !";
+        inputElement.css({"border-color":"red"});
     }
     errorElement.text(contactLastNameErrMsg);
 }
@@ -78,6 +90,14 @@ function validateContactEmail() {
     if(contactEmail == "" || contactEmail == null || contactEmail == undefined) {
         contactEmailErrFlag = true;
         contactEmailErrMsg = "Email Is Required !";
+        inputElement.css({"border-color":"red"});
+    } else if(contactEmail.match(whiteSpaceRegEx)) {
+        contactEmailErrFlag = true;
+        contactEmailErrMsg = "Whitespace Is Not Allowed !";
+        inputElement.css({"border-color":"red"});
+    } else if(!contactEmail.match(emailRegEx)) {
+        contactEmailErrFlag = true;
+        contactEmailErrMsg = "E-Mail Format Is Not Valid !";
         inputElement.css({"border-color":"red"});
     }
     errorElement.text(contactEmailErrMsg);
@@ -123,6 +143,10 @@ function validateContactMobile() {
     if(contactMobile == "" || contactMobile == null || contactMobile == undefined) {
         contactMobileErrFlag = true;
         contactMobileErrMsg = "Mobile Is Required !";
+        inputElement.css({"border-color":"red"});
+    } else if(!contactMobile.match(phoneRegEx)) {
+        contactMobileErrFlag = true;
+        contactMobileErrMsg = "Phone Number Format Is Not Valid !";
         inputElement.css({"border-color":"red"});
     }
     errorElement.text(contactMobileErrMsg);

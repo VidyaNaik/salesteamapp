@@ -6,6 +6,8 @@ define("BASEURL", "http://localhost/salesteamapp/");
 define("DEFAULT_PASSWORD", "sales1234");
 define("BDM_LIST_LIMIT", 4);
 define("BDE_LIST_LIMIT", 4);
+define("COMPANY_LIST_LIMIT", 4);
+define("CONTACT_LIST_LIMIT", 4);
 define("ERR_BLANK", "One Or More Fields Are Blank!");
 define("ERR_WHITESPACE", "Whitespaces Are Not Allowed!");
 define("ERR_CONTACT_EXISTS", "Contact With This Email ID Is Already Uploaded");

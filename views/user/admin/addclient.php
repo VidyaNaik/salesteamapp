@@ -494,13 +494,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         $(document).ready(function() {
             $("#contact-country-div select").change(function() {
                 if($("#contact-country-div select").val() !== "") {
+                    var stateOptionsBuilder = "<option value=''>Select State</option>";
+                    var cityOptionsBuilder = "<option value=''>Select City</option>";
                     loadStatesForCountry($("#contact-country-div select").val());
+                    $("#contact-city-div select").html(cityOptionsBuilder);
                     return;
                 }
-                var optionsBuilder = "<option value=''>Select State</option>";
-                $("#contact-state-div select").html(optionsBuilder);
-                optionsBuilder = "<option value=''>Select City</option>";
-                $("#contact-city-div select").html(optionsBuilder);
+                $("#contact-state-div select").html(stateOptionsBuilder);
+                $("#contact-city-div select").html(cityOptionsBuilder);
                     
             });
             $("#contact-state-div select").change(function() {

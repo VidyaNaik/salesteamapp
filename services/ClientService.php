@@ -1,6 +1,8 @@
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/utility/DatabaseManager.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Company.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
 
 class ClientService {
 
@@ -77,6 +79,60 @@ class ClientService {
         $stmt->bind_param("sssssiiiissssssi", $firstName, $lastName, $email, $category, $designation, $mobile, $city, $state, $country, $address, $linkedIn, $facebook, $twitter, $status, $added, $companyId);
         $stmt->execute();
         $stmt->close();
+    }
+
+    public function getCompaniesByOffset($offset) {
+        $limit = COMPANY_LIST_LIMIT;
+        $stmt = $this->connection->prepare("select * from client_companies order by client_company_id desc limit ?,?");
+        $stmt->bind_param("ii", $offset, $limit);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $listOfCompanies = array();
+        while($row = $res->fetch_assoc()) {
+            $company = new Company();
+            $company->setId($row['client_company_id']);
+            $company->setName($row['client_company_name']);
+            $company->setWebsite($row['client_company_website']);
+            $company->setAddress($row['client_company_address']);
+            $company->setPhone($row['client_company_phone']);
+            $company->setEmail($row['client_company_email']);
+            $company->setLinkedIn($row['client_company_linkedin']);
+            array_push($listOfCompanies, $company);
+        }
+        $stmt->close();
+        return $listOfCompanies;
+    }
+
+    public function getContactsByOffset($offset) {
+        $limit = CONTACT_LIST_LIMIT;
+        $stmt = $this->connection->prepare("select * from client_contacts order by client_contact_id desc limit ?,?");
+        $stmt->bind_param("ii", $offset, $limit);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $listOfContacts = array();
+        while($row = $res->fetch_assoc()) {
+            $contact = new Contact();
+            $contact->setId($row['client_contact_id']);
+            $contact->setFirstName($row['client_contact_first_name']);
+            $contact->setLastName($row['client_contact_last_name']);
+            $contact->setEmail($row['client_contact_email']);
+            $contact->setCategory($row['client_contact_category']);
+            $contact->setDesignation($row['client_contact_designation']);
+            $contact->setMobile($row['client_contact_mobile']);
+            $contact->setCountry($row['country_id']);
+            $contact->setState($row['state_id']);
+            $contact->setCity($row['city_id']);
+            $contact->setAddress($row['client_contact_address']);
+            $contact->setLinkedIn($row['client_contact_linkedin']);
+            $contact->setFacebook($row['client_contact_facebook']);
+            $contact->setTwitter($row['client_contact_twitter']);
+            $contact->setStatus($row['client_contact_status']);
+            $contact->setAdded($row['client_contact_added']);
+            $contact->setCompany($row['client_company_id']);
+            array_push($listOfContacts, $contact);
+        }
+        $stmt->close();
+        return $listOfContacts;
     }
 
 }

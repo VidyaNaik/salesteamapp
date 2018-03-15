@@ -41,7 +41,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            
+                            <pre>
+                                <?php $_SESSION['serverData'] ?>
+                            </pre>
                         </div>
                     </div>
                 </div>

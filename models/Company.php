@@ -37,7 +37,7 @@ class Company {
         return $this->email;
     }
 
-    public function getLinkedin() {
+    public function getLinkedIn() {
         return $this->linkedin;
     }
 
@@ -68,7 +68,7 @@ class Company {
         $this->email = $email;
     }
 
-    public function setLinkedin($linkedin) {
+    public function setLinkedIn($linkedin) {
         $this->linkedin = $linkedin;
     }
 
