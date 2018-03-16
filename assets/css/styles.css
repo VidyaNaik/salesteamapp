@@ -89,6 +89,10 @@ body {
     margin-bottom: 30px;
 }
 
+.data-list-wrapper {
+    overflow-x: auto;
+}
+
 /*cmplx-btn*/
 .cmplx-btn {
     display: inline-block;

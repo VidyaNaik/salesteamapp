@@ -44,7 +44,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                             <div class="panel panel-default">
                                 <div class="panel-heading">Client Companies</div>
                                 <div class="panel-body">
-                                    <div id="company-div">
+                                    <div id="company-div" class="data-list-wrapper">
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr class="info">
@@ -65,7 +65,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                             <div class="panel panel-default">
                                 <div class="panel-heading">Client Contacts</div>
                                 <div class="panel-body">
-                                    <div id="contact-div">
+                                    <div id="contact-div" class="data-list-wrapper">
                                         <table class="table table-striped table-hover table-bordered">
                                             <thead>
                                                 <tr class="info">

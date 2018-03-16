@@ -42,26 +42,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     <div class="alert alert-info" role="alert">
                         <button class="btn btn-info action-btn btn-identical-dimension" onclick="showClientList()">Back</button>
                     </div>
-                    <div id="contact-div">
+                    <div id="contact-div" class="data-list-wrapper">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr class="info">
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
-                                    <th>Company</th>
-                                    <th>Category</th>
-                                    <th>Designation</th>
                                     <th>Mobile</th>
-                                    <th>Country</th>
-                                    <th>State</th>
-                                    <th>City</th>
-                                    <th>Address</th>
-                                    <th>LinkedIn</th>
-                                    <th>Facebook</th>
-                                    <th>Twitter</th>
-                                    <th>Added</th>
-                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="contact-list"></tbody>
@@ -108,7 +97,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 }
                 for(var i=0; i<response.length; i++) {
                     contactListBuilder += "<tr>";
-                    contactListBuilder += "<td>" + response[i] + "</td>";
+                    contactListBuilder += "<td>" + response[i].firstName + "</td>";
+                    contactListBuilder += "<td>" + response[i].lastName + "</td>";
+                    contactListBuilder += "<td>" + response[i].email + "</td>";
+                    contactListBuilder += "<td>" + response[i].mobile + "</td>";
+                    contactListBuilder += "<td><button class='btn btn-default action-btn' onclick='showContact(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn'><span class='glyphicon glyphicon-edit'></span></button><button class='btn btn-default action-btn'><span class='glyphicon glyphicon-trash'></span></button></td>";
                     contactListBuilder += "</tr>";
                 }
                 $("#contact-list").append(contactListBuilder);
@@ -125,6 +118,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
     function showClientList() {
         window.location = 'clientlist.php';
+    }
+
+    function showContact(contactId) {
+        window.location = 'showcontact.php?contactId=' + contactId;
     }
 
     </script>

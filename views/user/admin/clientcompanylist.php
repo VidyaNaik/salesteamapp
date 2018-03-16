@@ -42,16 +42,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     <div class="alert alert-info" role="alert">
                         <button class="btn btn-info action-btn btn-identical-dimension" onclick="showClientList()">Back</button>
                     </div>
-                    <div id="company-div">
+                    <div id="company-div" class="data-list-wrapper">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr class="info">
                                     <th>Name</th>
                                     <th>Website</th>
-                                    <th>Address</th>
                                     <th>Phone</th>
                                     <th>E-Mail</th>
-                                    <th>LinkedIn</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="company-list"></tbody>
@@ -100,10 +99,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     companyListBuilder += "<tr>";
                     companyListBuilder += "<td>" + response[i].name + "</td>";
                     companyListBuilder += "<td>" + response[i].website + "</td>";
-                    companyListBuilder += "<td>" + response[i].address + "</td>";
                     companyListBuilder += "<td>" + response[i].phone + "</td>";
                     companyListBuilder += "<td>" + response[i].email + "</td>";
-                    companyListBuilder += "<td>" + response[i].linkedin + "</td>";
+                    companyListBuilder += "<td><button class='btn btn-default action-btn' onclick='showCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn' onclick='editCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-edit'></span></button><button class='btn btn-default action-btn' onclick='deleteCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-trash'></span></button></td>";
                     companyListBuilder += "</tr>";
                 }
                 $("#company-list").append(companyListBuilder);
@@ -120,6 +118,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
     function showClientList() {
         window.location = 'clientlist.php';
+    }
+
+    function showCompany(companyId) {
+        window.location = 'showcompany.php?companyId=' + companyId;
+    }
+
+    function editCompany(id) {
+        alert(id);
+    }
+
+    function deleteCompany(id) {
+        alert(id);
     }
 
     </script>

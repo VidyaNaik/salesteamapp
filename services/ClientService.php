@@ -103,6 +103,25 @@ class ClientService {
         return $listOfCompanies;
     }
 
+    public function getCompanyById($companyId) {
+        $stmt = $this->connection->prepare("select * from client_companies where client_company_id = ?");
+        $stmt->bind_param("i", $companyId);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $company = new Company();
+        if($row = $res->fetch_assoc()) {
+            $company->setId($row['client_company_id']);
+            $company->setName($row['client_company_name']);
+            $company->setWebsite($row['client_company_website']);
+            $company->setAddress($row['client_company_address']);
+            $company->setPhone($row['client_company_phone']);
+            $company->setEmail($row['client_company_email']);
+            $company->setLinkedIn($row['client_company_linkedin']);
+        }
+        $stmt->close();
+        return $company;
+    }
+
     public function getContactsByOffset($offset) {
         $limit = CONTACT_LIST_LIMIT;
         $stmt = $this->connection->prepare("select * from client_contacts order by client_contact_id desc limit ?,?");
@@ -133,6 +152,35 @@ class ClientService {
         }
         $stmt->close();
         return $listOfContacts;
+    }
+
+    public function getContactById($contactId) {
+        $stmt = $this->connection->prepare("select * from client_contacts where client_contact_id = ?");
+        $stmt->bind_param("i", $contactId);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $contact = new Contact();
+        if($row = $res->fetch_assoc()) {
+            $contact->setId($row['client_contact_id']);
+            $contact->setFirstName($row['client_contact_first_name']);
+            $contact->setLastName($row['client_contact_last_name']);
+            $contact->setEmail($row['client_contact_email']);
+            $contact->setCategory($row['client_contact_category']);
+            $contact->setDesignation($row['client_contact_designation']);
+            $contact->setMobile($row['client_contact_mobile']);
+            $contact->setCountry($row['country_id']);
+            $contact->setState($row['state_id']);
+            $contact->setCity($row['city_id']);
+            $contact->setAddress($row['client_contact_address']);
+            $contact->setLinkedIn($row['client_contact_linkedin']);
+            $contact->setFacebook($row['client_contact_facebook']);
+            $contact->setTwitter($row['client_contact_twitter']);
+            $contact->setStatus($row['client_contact_status']);
+            $contact->setAdded($row['client_contact_added']);
+            $contact->setCompany($row['client_company_id']);
+        }
+        $stmt->close();
+        return $contact;
     }
 
 }
