@@ -41,6 +41,14 @@ body {
     margin: 10px;
 }
 
+.app-table-theme {
+    margin-top: 20px;
+}
+
+.app-table-theme tr {
+    height: 42px;
+}
+
 .app-table-theme th {
     background-color: #f8f8f8;
     width: 200px;
@@ -91,6 +99,10 @@ body {
 
 .data-list-wrapper {
     overflow-x: auto;
+}
+
+.inline-form-control {
+    height: 25px;
 }
 
 /*cmplx-btn*/
