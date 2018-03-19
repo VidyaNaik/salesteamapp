@@ -44,6 +44,27 @@ class ClientService {
         $max_client_company_id = $query->fetch_assoc()['max(client_company_id)'];
         return $max_client_company_id;
     }
+    
+    public function updateContact($contact) {
+        $id = $contact->getId();
+        $firstName = $contact->getFirstName();
+        $lastName = $contact->getLastName();
+        $email = $contact->getEmail();
+        $category = $contact->getCategory();
+        $designation = $contact->getDesignation();
+        $mobile = $contact->getMobile();
+        $city = $contact->getCity();
+        $state = $contact->getState();
+        $country = $contact->getCountry();
+        $address = $contact->getAddress();
+        $linkedIn = $contact->getLinkedIn();
+        $facebook = $contact->getFacebook();
+        $twitter = $contact->getTwitter();
+        $stmt = $this->connection->prepare("update client_contacts set client_contact_first_name = ?, client_contact_last_name = ?, client_contact_email = ?, client_contact_category = ?, client_contact_designation = ?, client_contact_mobile = ?, city_id = ?, state_id = ?, country_id = ?, client_contact_address = ?, client_contact_linkedin = ?, client_contact_facebook = ?, client_contact_twitter = ? where client_contact_id = ?");
+        $stmt->bind_param("sssssiiiissssi", $firstName, $lastName, $email, $category, $designation, $mobile, $city, $state, $country, $address, $linkedIn, $facebook, $twitter, $id);
+        $stmt->execute();
+        $stmt->close();
+    }
 
     public function checkContactEmail($contactEmail) {
         $stmt = $this->connection->prepare("select client_contact_email from client_contacts where client_contact_email = ?");
@@ -51,6 +72,21 @@ class ClientService {
         $stmt->execute();
         $res = $stmt->get_result();
         $stmt->close();
+        if($res->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function checkContactEmailAllowSelf($email, $originalEmail) {
+        if($email === $originalEmail) {
+            return true;
+        }
+        $stmt = $this->connection->prepare("select client_contact_email from client_contacts where client_contact_email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
         if($res->num_rows > 0) {
             return false;
         } else {
@@ -181,6 +217,15 @@ class ClientService {
         }
         $stmt->close();
         return $contact;
+    }
+
+    public function deleteContactById($contactId) {
+        $stmt = $this->connection->prepare("delete from client_contacts where client_contact_id = ?");
+        $stmt->bind_param("i", $contactId);
+        $stmt->execute();
+        $affected_rows = $stmt->affected_rows;
+        $stmt->close();
+        return $affected_rows;
     }
 
 }

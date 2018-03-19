@@ -493,9 +493,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
         $(document).ready(function() {
             $("#contact-country-div select").change(function() {
-                if($("#contact-country-div select").val() !== "") {
-                    var stateOptionsBuilder = "<option value=''>Select State</option>";
-                    var cityOptionsBuilder = "<option value=''>Select City</option>";
+                var stateOptionsBuilder = "<option value=''>Select State</option>";
+                var cityOptionsBuilder = "<option value=''>Select City</option>";
+                if($("#contact-country-div select").val() !== "") {    
                     loadStatesForCountry($("#contact-country-div select").val());
                     $("#contact-city-div select").html(cityOptionsBuilder);
                     return;
@@ -505,12 +505,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     
             });
             $("#contact-state-div select").change(function() {
+                var cityOptionsBuilder = "<option value=''>Select City</option>";
                 if($("#contact-state-div select").val() !== "") {
                     loadCitiesForState($("#contact-state-div select").val());
                     return;
                 }
-                var optionsBuilder = "<option value=''>Select City</option>";
-                $("#contact-city-div select").html(optionsBuilder);
+                $("#contact-city-div select").html(cityOptionsBuilder);
                     
             });
         });

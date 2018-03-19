@@ -24,6 +24,7 @@ $contactId = $_GET["contactId"];
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASEURL; ?>assets/css/styles.css" />
     <script src="<?php echo BASEURL; ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo BASEURL; ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo BASEURL; ?>assets/js/admin/editClientContactValidaiton.js"></script>
 </head>
 <body>
     <?php include 'navbar.php';?>
@@ -50,71 +51,73 @@ $contactId = $_GET["contactId"];
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 class="text-center">Contact ""</h2>
+                            <h2 class="text-center" id="contact-name-heading"></h2>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered app-table-theme">
-                                <tr id="contact-first-name-tr">
-                                    <th>First Name</th>
-                                    <td id="contact-first-name-td"></td>
-                                </tr>
-                                <tr id="contact-last-name-tr">
-                                    <th>Last Name</th>
-                                    <td id="contact-last-name-td"></td>
-                                </tr>
-                                <tr id="contact-email-tr">
-                                    <th>Email</th>
-                                    <td id="contact-email-td"></td>
-                                </tr>
-                                <tr id="contact-category-tr">
-                                    <th>Category</th>
-                                    <td id="contact-category-td"></td>
-                                </tr>
-                                <tr id="contact-designation-tr">
-                                    <th>Designation</th>
-                                    <td id="contact-designation-td"></td>
-                                </tr>
-                                <tr id="contact-mobile-tr">
-                                    <th>Mobile</th>
-                                    <td id="contact-mobile-td"></td>
-                                </tr>
-                                <tr id="contact-country-tr">
-                                    <th>Country</th>
-                                    <td id="contact-country-td"></td>
-                                </tr>
-                                <tr id="contact-state-tr">
-                                    <th>State</th>
-                                    <td id="contact-state-td"></td>
-                                </tr>
-                                <tr id="contact-city-tr">
-                                    <th>City</th>
-                                    <td id="contact-city-td"></td>
-                                </tr>
-                                <tr id="contact-address-tr">
-                                    <th>Address</th>
-                                    <td id="contact-address-td"></td>
-                                </tr>
-                                <tr id="contact-linkedin-tr">
-                                    <th>LinkedIn</th>
-                                    <td id="contact-linkedin-td"></td>
-                                </tr>
-                                <tr id="contact-facebook-tr">
-                                    <th>Facebook</th>
-                                    <td id="contact-facebook-td"></td>
-                                </tr>
-                                <tr id="contact-twitter-tr">
-                                    <th>Twitter</th>
-                                    <td id="contact-twitter-td"></td>
-                                </tr>
-                                <tr id="contact-status-tr">
-                                    <th>Status</th>
-                                    <td id="contact-status-td"></td>
-                                </tr>
-                                <tr id="contact-added-tr">
-                                    <th>Added</th>
-                                    <td id="contact-added-td"></td>
-                                </tr>
-                            </table>
+                            <form id="contact-form" action="<?php echo BASEURL; ?>actions/admin/performupdatecontact.php" method="post">
+                                <table class="table table-bordered app-table-theme">
+                                    <tr id="contact-first-name-tr">
+                                        <th>First Name</th>
+                                        <td id="contact-first-name-td"></td>
+                                    </tr>
+                                    <tr id="contact-last-name-tr">
+                                        <th>Last Name</th>
+                                        <td id="contact-last-name-td"></td>
+                                    </tr>
+                                    <tr id="contact-email-tr">
+                                        <th>Email</th>
+                                        <td id="contact-email-td"></td>
+                                    </tr>
+                                    <tr id="contact-category-tr">
+                                        <th>Category</th>
+                                        <td id="contact-category-td"></td>
+                                    </tr>
+                                    <tr id="contact-designation-tr">
+                                        <th>Designation</th>
+                                        <td id="contact-designation-td"></td>
+                                    </tr>
+                                    <tr id="contact-mobile-tr">
+                                        <th>Mobile</th>
+                                        <td id="contact-mobile-td"></td>
+                                    </tr>
+                                    <tr id="contact-country-tr">
+                                        <th>Country</th>
+                                        <td id="contact-country-td"></td>
+                                    </tr>
+                                    <tr id="contact-state-tr">
+                                        <th>State</th>
+                                        <td id="contact-state-td"></td>
+                                    </tr>
+                                    <tr id="contact-city-tr">
+                                        <th>City</th>
+                                        <td id="contact-city-td"></td>
+                                    </tr>
+                                    <tr id="contact-address-tr">
+                                        <th>Address</th>
+                                        <td id="contact-address-td"></td>
+                                    </tr>
+                                    <tr id="contact-linkedin-tr">
+                                        <th>LinkedIn</th>
+                                        <td id="contact-linkedin-td"></td>
+                                    </tr>
+                                    <tr id="contact-facebook-tr">
+                                        <th>Facebook</th>
+                                        <td id="contact-facebook-td"></td>
+                                    </tr>
+                                    <tr id="contact-twitter-tr">
+                                        <th>Twitter</th>
+                                        <td id="contact-twitter-td"></td>
+                                    </tr>
+                                    <tr id="contact-status-tr">
+                                        <th>Status</th>
+                                        <td id="contact-status-td"></td>
+                                    </tr>
+                                    <tr id="contact-added-tr">
+                                        <th>Added</th>
+                                        <td id="contact-added-td"></td>
+                                    </tr>
+                                </table>
+                            </form>
                             <div id="options-div">
                                 <button class="btn btn-primary action-btn" onclick="showCompany()">Show Company</button>
                             </div>
@@ -153,6 +156,7 @@ $contactId = $_GET["contactId"];
                     contactId: contactId
                 },
                 success: function(contactResponse) {
+                    $("#contact-name-heading").text('Contact "' + contactResponse.firstName + ' ' + contactResponse.lastName + '"');
                     $("#contact-first-name-td").text(contactResponse.firstName);
                     $("#contact-last-name-td").text(contactResponse.lastName);
                     $("#contact-email-td").text(contactResponse.email);
@@ -165,6 +169,8 @@ $contactId = $_GET["contactId"];
                     $("#contact-twitter-td").text(contactResponse.twitter);
                     $("#contact-status-td").text(contactResponse.status);
                     $("#contact-added-td").text(contactResponse.added);
+                    $("#contact-form").append("<input type='hidden' name='contact-id' value='<?php echo $contactId; ?>'>");
+                    $("#contact-form").append("<input type='hidden' name='contact-original-email' value='" + contactResponse.email + "'>");
                     companyId = contactResponse.company;
                     fetchAllLocationsAndLoadIntoDOM(contactResponse);
                 }
@@ -245,26 +251,27 @@ $contactId = $_GET["contactId"];
             buildCountryDropDown();
             buildStateDropDown();
             buildCityDropDown();
+            setLocationChainingDropDownEffect();
             $("#save-btn").show();
             $("#reset-btn").show();
         }
 
         function buildAllInputFields() {
-            $("#contact-first-name-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-first-name-td").text() + "'>");
-            $("#contact-last-name-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-last-name-td").text() + "'>");
-            $("#contact-email-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-email-td").text() + "'>");
-            $("#contact-category-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-category-td").text() + "'>");
-            $("#contact-designation-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-designation-td").text() + "'>");
-            $("#contact-mobile-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-mobile-td").text() + "'>");
-            $("#contact-address-td").html("<textarea class='form-control' style='resize: none;'>" + $("#contact-address-td").text() + "</textarea>");
-            $("#contact-linkedin-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-linkedin-td").text() + "'>");
-            $("#contact-facebook-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-facebook-td").text() + "'>");
-            $("#contact-twitter-td").html("<input type='text' class='form-control inline-form-control' value='" + $("#contact-twitter-td").text() + "'>");
+            $("#contact-first-name-td").html("<input id='contact-first-name' name='contact-first-name' type='text' class='form-control inline-form-control' value='" + $("#contact-first-name-td").text() + "' onfocusout='validateContactFirstName()'>");
+            $("#contact-last-name-td").html("<input id='contact-last-name' name='contact-last-name' type='text' class='form-control inline-form-control' value='" + $("#contact-last-name-td").text() + "' onfocusout='validateContactLastName()'>");
+            $("#contact-email-td").html("<input id='contact-email' name='contact-email' type='text' class='form-control inline-form-control' value='" + $("#contact-email-td").text() + "' onfocusout='validateContactEmail()'>");
+            $("#contact-category-td").html("<input id='contact-category' name='contact-category' type='text' class='form-control inline-form-control' value='" + $("#contact-category-td").text() + "' onfocusout='validateContactCategory()'>");
+            $("#contact-designation-td").html("<input id='contact-designation' name='contact-designation' type='text' class='form-control inline-form-control' value='" + $("#contact-designation-td").text() + "' onfocusout='validateContactDesignation()'>");
+            $("#contact-mobile-td").html("<input id='contact-mobile' name='contact-mobile' type='text' class='form-control inline-form-control' value='" + $("#contact-mobile-td").text() + "' onfocusout='validateContactMobile()'>");
+            $("#contact-address-td").html("<textarea id='contact-address' name='contact-address' class='form-control' style='resize: none;' onfocusout='validateContactAddress()'>" + $("#contact-address-td").text() + "</textarea>");
+            $("#contact-linkedin-td").html("<input id='contact-linkedin' name='contact-linkedin' type='text' class='form-control inline-form-control' value='" + $("#contact-linkedin-td").text() + "' onfocusout='validateContactLinkedIn()'>");
+            $("#contact-facebook-td").html("<input id='contact-facebook' name='contact-facebook' type='text' class='form-control inline-form-control' value='" + $("#contact-facebook-td").text() + "' onfocusout='validateContactFacebook()'>");
+            $("#contact-twitter-td").html("<input id='contact-twitter' name='contact-twitter' type='text' class='form-control inline-form-control' value='" + $("#contact-twitter-td").text() + "' onfocusout='validateContactTwitter()'>");
         }
 
         function buildCountryDropDown() {
             var countryBuilder = "";
-            countryBuilder += "<select class='form-control'>"
+            countryBuilder += "<select class='form-control' id='contact-country' name='contact-country' onfocusout='validateContactCountry()'>"
             countryBuilder += "<option value=''>Select Country</option>"
             for(var i=0; i<countries.length; i++) {
                 countryBuilder += "<option value='" + countries[i].id + "'>" + countries[i].name + "</option>"
@@ -282,7 +289,7 @@ $contactId = $_GET["contactId"];
                 }
             }
             var stateBuilder = "";
-            stateBuilder += "<select class='form-control'>";
+            stateBuilder += "<select class='form-control' id='contact-state' name='contact-state' onfocusout='validateContactState()'>";
             stateBuilder += "<option value=''>Select State</option>";
             for(var i=0; i<countryStates.length; i++) {
                 stateBuilder += "<option value='" + countryStates[i].id + "'>" + countryStates[i].name + "</option>"
@@ -300,7 +307,7 @@ $contactId = $_GET["contactId"];
                 }
             }
             var cityBuilder = "";
-            cityBuilder += "<select class='form-control'>";
+            cityBuilder += "<select class='form-control' id='contact-city' name='contact-city' onfocusout='validateContactCity()'>";
             cityBuilder += "<option value=''>Select City</option>";
             for(var i=0; i<stateCities.length; i++) {
                 cityBuilder += "<option value='" + stateCities[i].id + "'>" + stateCities[i].name + "</option>"
@@ -308,6 +315,60 @@ $contactId = $_GET["contactId"];
             cityBuilder += "</select>"
             $("#contact-city-td").html(cityBuilder);
             $("#contact-city-td select").val(contactCity);
+        }
+
+        function setLocationChainingDropDownEffect() {
+            $("#contact-country").change(function() {
+                var stateOptionsBuilder = "<option value=''>Select State</option>";
+                var cityOptionsBuilder = "<option value=''>Select City</option>";
+                if($("#contact-country").val() !== "") {    
+                    loadStatesForCountry($("#contact-country").val());
+                    $("#contact-city").html(cityOptionsBuilder);
+                    return;
+                }
+                $("#contact-state").html(stateOptionsBuilder);
+                $("#contact-city").html(cityOptionsBuilder);
+                    
+            });
+            $("#contact-state").change(function() {
+                var cityOptionsBuilder = "<option value=''>Select City</option>";
+                if($("#contact-state-div select").val() !== "") {
+                    loadCitiesForState($("#contact-state").val());
+                    return;
+                }
+                $("#contact-city-div select").html(cityOptionsBuilder);
+                    
+            });
+        }
+        
+        function loadStatesForCountry(countryId) {
+            var countryStates = [];
+            for(var i=0; i<states.length; i++) {
+                if(countryId == states[i].country) {
+                    countryStates.push(jQuery.extend(true, {}, states[i]));
+                }
+            }
+            var stateOptionsBuilder = "";
+            stateOptionsBuilder += "<option value=''>Select State</option>";
+            for(var i=0; i<countryStates.length; i++) {
+                stateOptionsBuilder += "<option value='" + countryStates[i].id + "'>" + countryStates[i].name + "</option>"
+            }
+            $("#contact-state").html(stateOptionsBuilder);
+        }
+
+        function loadCitiesForState(stateId) {
+            var stateCities = [];
+            for(var i=0; i<cities.length; i++) {
+                if(stateId == cities[i].state) {
+                    stateCities.push(jQuery.extend(true, {}, cities[i]));
+                }
+            }
+            var cityOptionsBuilder = "";
+            cityOptionsBuilder += "<option value=''>Select City</option>";
+            for(var i=0; i<stateCities.length; i++) {
+                cityOptionsBuilder += "<option value='" + stateCities[i].id + "'>" + stateCities[i].name + "</option>"
+            }
+            $("#contact-city").html(cityOptionsBuilder);
         }
 
         function showCompany() {
@@ -351,6 +412,15 @@ $contactId = $_GET["contactId"];
 
         function resetContact() {
             window.location.reload();
+        }
+
+        function saveContact() {
+            /**
+             * isFormValid implementation is in editClientContactValidation.js
+             */
+            if(isFormValid()) {
+                $("#contact-form").submit();
+            }
         }
 
     </script>

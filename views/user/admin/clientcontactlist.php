@@ -101,7 +101,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     contactListBuilder += "<td>" + response[i].lastName + "</td>";
                     contactListBuilder += "<td>" + response[i].email + "</td>";
                     contactListBuilder += "<td>" + response[i].mobile + "</td>";
-                    contactListBuilder += "<td><button class='btn btn-default action-btn' onclick='showContact(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn'><span class='glyphicon glyphicon-trash'></span></button></td>";
+                    contactListBuilder += "<td><button class='btn btn-default action-btn' onclick='showContact(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn' onclick='deleteContact(" + response[i].id + ")'><span class='glyphicon glyphicon-trash'></span></button></td>";
                     contactListBuilder += "</tr>";
                 }
                 $("#contact-list").append(contactListBuilder);
@@ -111,7 +111,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
             },
             error: function(response) {
                 $("#contact-div").html("<h4 class='text-center'>Something Went Wrong!</h4>");
-                $("#options-div").html("<button id='load-more-btn' class='btn btn-default text-center' onclick='location.reload()'>Reload Page</button>");
+                $("#options-div").html("<button id='reload-btn' class='btn btn-default text-center' onclick='location.reload()'>Reload Page</button>");
             }
         });
     }
@@ -122,6 +122,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
     function showContact(contactId) {
         window.location = 'showcontact.php?contactId=' + contactId;
+    }
+
+    function deleteContact(contactId) {
+        var result = confirm("Are You Sure?");
+            if(result) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo BASEURL ?>actions/admin/performdeletecontact.php",
+                    data: {
+                        contactId: contactId
+                    },
+                    success: function(response) {
+                        window.location.reload();
+                    }
+                });
+            }
     }
 
     </script>
