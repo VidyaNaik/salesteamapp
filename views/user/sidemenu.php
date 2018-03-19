@@ -16,7 +16,10 @@
         <a href="admin/bdelist.php" class="list-group-item">BDE List</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="admin/clientlist.php" class="list-group-item">Client List</a>
+        <a href="admin/clientcompanylist.php" class="list-group-item">Client Company List</a>
+    <?php endif; ?>
+    <?php if ($_SESSION['role'] == "ADMIN") : ?>
+        <a href="admin/clientcontactlist.php" class="list-group-item">Client Contact List</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
         <a href="admin/addlocation.php" class="list-group-item">Add Location</a>

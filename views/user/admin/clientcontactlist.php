@@ -39,9 +39,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                             }
                         ?>
                     </div>
-                    <div class="alert alert-info" role="alert">
-                        <button class="btn btn-info action-btn btn-identical-dimension" onclick="showClientList()">Back</button>
-                    </div>
                     <div id="contact-div" class="data-list-wrapper">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
@@ -114,10 +111,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                 $("#options-div").html("<button id='reload-btn' class='btn btn-default text-center' onclick='location.reload()'>Reload Page</button>");
             }
         });
-    }
-
-    function showClientList() {
-        window.location = 'clientlist.php';
     }
 
     function showContact(contactId) {

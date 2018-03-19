@@ -39,9 +39,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                             }
                         ?>
                     </div>
-                    <div class="alert alert-info" role="alert">
-                        <button class="btn btn-info action-btn btn-identical-dimension" onclick="showClientList()">Back</button>
-                    </div>
                     <div id="company-div" class="data-list-wrapper">
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
@@ -101,7 +98,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     companyListBuilder += "<td>" + response[i].website + "</td>";
                     companyListBuilder += "<td>" + response[i].phone + "</td>";
                     companyListBuilder += "<td>" + response[i].email + "</td>";
-                    companyListBuilder += "<td><button class='btn btn-default action-btn' onclick='showCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn' onclick='editCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-edit'></span></button><button class='btn btn-default action-btn' onclick='deleteCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-trash'></span></button></td>";
+                    companyListBuilder += "<td><button class='btn btn-default action-btn' onclick='showCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-eye-open'></span></button><button class='btn btn-default action-btn' onclick='deleteCompany(" + response[i].id + ")'><span class='glyphicon glyphicon-trash'></span></button></td>";
                     companyListBuilder += "</tr>";
                 }
                 $("#company-list").append(companyListBuilder);
@@ -116,16 +113,8 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         });
     }
 
-    function showClientList() {
-        window.location = 'clientlist.php';
-    }
-
     function showCompany(companyId) {
         window.location = 'showcompany.php?companyId=' + companyId;
-    }
-
-    function editCompany(id) {
-        alert(id);
     }
 
     function deleteCompany(id) {

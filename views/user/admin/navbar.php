@@ -38,7 +38,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Client<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="addclient.php">Add Client</a></li>
-                        <li><a href="clientlist.php">Client List</a></li>
+                        <li><a href="clientcompanylist.php">Client Company List</a></li>
+                        <li><a href="clientcontactlist.php">Client Contact List</a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
