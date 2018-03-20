@@ -41,6 +41,10 @@ body {
     margin: 10px;
 }
 
+.list-heading {
+    height: 20px;
+}
+
 .app-table-theme {
     margin-top: 20px;
 }

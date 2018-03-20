@@ -9,6 +9,7 @@ if($_SESSION['role'] !== "ADMIN") {
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/ClientService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
 $clientService = new ClientService();
 $contact = new Contact();
 $originalEmail = $_POST["contact-original-email"];

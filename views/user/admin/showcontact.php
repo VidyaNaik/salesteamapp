@@ -43,17 +43,16 @@ $contactId = $_GET["contactId"];
                             }
                         ?>
                     </div>
-                    <div class="alert alert-info" role="alert">
-                        <button class="btn btn-info action-btn btn-identical-dimension" onclick="showCompanyList()">Back</button>
-                        <button id="edit-btn" class="btn btn-warning action-btn btn-identical-dimension" onclick="editContact()">Edit</button>
-                        <button id="save-btn" class="btn btn-success action-btn btn-identical-dimension" onclick="saveContact()">Save</button>
-                        <button id="reset-btn" class="btn btn-danger action-btn btn-identical-dimension" onclick="resetContact()">Cancel</button>
-                    </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="text-center" id="contact-name-heading"></h2>
                         </div>
                         <div class="panel-body">
+                            <div>
+                                <button id="edit-btn" class="btn btn-warning action-btn btn-identical-dimension" onclick="editContact()">Edit</button>
+                                <button id="save-btn" class="btn btn-success action-btn btn-identical-dimension" onclick="saveContact()">Save</button>
+                                <button id="reset-btn" class="btn btn-danger action-btn btn-identical-dimension" onclick="resetContact()">Cancel</button>
+                            </div>
                             <form id="contact-form" action="<?php echo BASEURL; ?>actions/admin/performupdatecontact.php" method="post">
                                 <table class="table table-bordered app-table-theme">
                                     <tr id="contact-first-name-tr">
