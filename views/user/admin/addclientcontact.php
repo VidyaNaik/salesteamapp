@@ -43,7 +43,7 @@ $companyId = $_GET['companyId'];
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <form id="addContactForm" href="" class="form-horizontal">
+                            <form id="addContactForm" href="<?php echo BASEURL; ?>actions/admin/haha.php" class="form-horizontal">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div id="contact-first-name-div" class="form-group form-group-mod">
@@ -262,6 +262,7 @@ $companyId = $_GET['companyId'];
 
         function saveContactForm() {
             if(validateContactFields()) {
+                //console.log($("#addContactForm").attr('href'));
                 $("#addContactForm").submit();
             }
         }
