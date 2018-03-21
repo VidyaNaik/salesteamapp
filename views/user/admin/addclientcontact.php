@@ -43,13 +43,13 @@ $companyId = $_GET['companyId'];
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <form id="addContactForm" href="<?php echo BASEURL; ?>actions/admin/haha.php" class="form-horizontal">
+                            <form id="addContactForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/admin/performaddclientcontact.php" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div id="contact-first-name-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">First Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter First Name" class="form-control" onfocusout="validateContactFirstName()">
+                                                <input name="contact-first-name" type="text" placeholder="Enter First Name" class="form-control" onfocusout="validateContactFirstName()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -58,7 +58,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-last-name-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Last Name</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Last Name" class="form-control" onfocusout="validateContactLastName()">
+                                                <input name="contact-last-name" type="text" placeholder="Enter Last Name" class="form-control" onfocusout="validateContactLastName()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-email-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">E-Mail</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter E-Mail Address" class="form-control" onfocusout="validateContactEmail()">
+                                                <input name="contact-email" type="text" placeholder="Enter E-Mail Address" class="form-control" onfocusout="validateContactEmail()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-category-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Category</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Category" class="form-control" onfocusout="validateContactCategory()">
+                                                <input name="contact-category" type="text" placeholder="Enter Category" class="form-control" onfocusout="validateContactCategory()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-designation-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Designation</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Designation" class="form-control" onfocusout="validateContactDesignation()">
+                                                <input name="contact-designation" type="text" placeholder="Enter Designation" class="form-control" onfocusout="validateContactDesignation()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-mobile-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Mobile</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Mobile" class="form-control" onfocusout="validateContactMobile()">
+                                                <input name="contact-mobile" type="text" placeholder="Enter Mobile" class="form-control" onfocusout="validateContactMobile()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-country-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Country</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" onfocusout="validateContactCountry()">
+                                                <select name="contact-country" class="form-control" onfocusout="validateContactCountry()">
                                                     <option value="">Select Country</option>
                                                 </select>
                                                 <p></p>
@@ -120,7 +120,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-state-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">State</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" onfocusout="validateContactState()">
+                                                <select name="contact-state" class="form-control" onfocusout="validateContactState()">
                                                     <option value="">Select State</option>
                                                 </select>
                                                 <p></p>
@@ -133,7 +133,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-city-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">City</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" onfocusout="validateContactCity()">
+                                                <select name="contact-city" class="form-control" onfocusout="validateContactCity()">
                                                     <option value="">Select City</option>
                                                 </select>
                                                 <p></p>
@@ -144,7 +144,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-linkedin-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">LinkedIn</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter LinkedIn" class="form-control" onfocusout="validateContactLinkedIn()">
+                                                <input name="contact-linkedin" type="text" placeholder="Enter LinkedIn" class="form-control" onfocusout="validateContactLinkedIn()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -155,7 +155,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-facebook-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Facebook</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Facebook" class="form-control" onfocusout="validateContactFacebook()">
+                                                <input name="contact-facebook" type="text" placeholder="Enter Facebook" class="form-control" onfocusout="validateContactFacebook()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -164,7 +164,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-twitter-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Twitter</label>
                                             <div class="col-sm-9">
-                                                <input type="text" placeholder="Enter Twitter" class="form-control" onfocusout="validateContactTwitter()">
+                                                <input name="contact-twitter" type="text" placeholder="Enter Twitter" class="form-control" onfocusout="validateContactTwitter()">
                                                 <p></p>
                                             </div>
                                         </div>
@@ -175,7 +175,7 @@ $companyId = $_GET['companyId'];
                                         <div id="contact-address-div" class="form-group form-group-mod">
                                             <label class="control-label col-sm-3">Address</label>
                                             <div class="col-sm-9">
-                                                <textarea placeholder="Enter Address" class="form-control" style="resize: none;" onfocusout="validateContactAddress()"></textarea>
+                                                <textarea name="contact-address" placeholder="Enter Address" class="form-control" style="resize: none;" onfocusout="validateContactAddress()"></textarea>
                                                 <p></p>
                                             </div>
                                         </div>
@@ -184,6 +184,7 @@ $companyId = $_GET['companyId'];
 
                                     </div>
                                 </div>
+                                <input type="hidden" name="company-id" value="<?php echo $companyId; ?>">
                                 <div class="row text-center form-group-mod">
                                     <button id="contactSuccessBtn" type="button" class="btn btn-primary form-btn btn-identical-dimension" onclick="saveContactForm()">Save</button>
                                     <button id="contactFailBtn" type="button" class="btn btn-danger form-btn btn-identical-dimension" onclick="addContactFormReset()">Reset</button>
