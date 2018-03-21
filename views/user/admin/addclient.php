@@ -87,6 +87,15 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
+                                    <label class="control-label col-sm-3">Assign To BDM</label>
+                                    <div class="col-sm-9">
+                                        <select id="assignToBdm" name="assignToBdm" class="form-control" onfocusout="validateAssignToBdm()">
+                                            <option>Select BDM</option>
+                                        </select>
+                                        <p id="assignToBdmErrMsg"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Contacts</label>
                                     <div class="col-sm-9">
                                         <div id="client-contact-pool" class="client-contact-pool">
@@ -97,7 +106,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                 <input type='hidden' id='clientTotalContacts' name='clientTotalContacts' value="0">
                                 <div class="form-group form-group-mod"> 
                                     <div class="col-sm-12 text-center">
-                                        <button id="add-btn" type="submit" class="btn btn-primary form-btn" onclick="addClientFormValidation()">Save</button>
+                                        <button id="add-btn" type="button" class="btn btn-primary form-btn" onclick="addClientFormValidation()">Save</button>
                                         <button id="reset-btn" type="button" class="btn btn-warning form-btn" onclick="addClientFormReset()">Clear</button>
                                     </div>
                                 </div>
@@ -492,6 +501,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
          */
 
         $(document).ready(function() {
+            loadAllBdms();
             $("#contact-country-div select").change(function() {
                 var stateOptionsBuilder = "<option value=''>Select State</option>";
                 var cityOptionsBuilder = "<option value=''>Select City</option>";
@@ -514,6 +524,22 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     
             });
         });
+        
+        function loadAllBdms() {
+            $.ajax({
+                type: "GET",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchbdmlistall.php",
+                success: function(response) {
+                    var optionsBuilder = "<option value=''>Select BDM</option>";
+                    for(var i=0; i<response.length; i++) {
+                        optionsBuilder += "<option value='" + response[i].id + "'>";
+                        optionsBuilder += response[i].name;
+                        optionsBuilder += "</option>";
+                    }
+                    $("#assignToBdm").html(optionsBuilder);
+                }
+            });
+        }
 
         function loadCountriesIntoContactForm() {
             $.ajax({

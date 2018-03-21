@@ -20,6 +20,12 @@ $companyAddress = $_POST["companyAddress"];
 $companyPhone = $_POST["companyPhone"];
 $companyEmail = $_POST["companyEmail"];
 $companyLinkedIn = $_POST["companyLinkedIn"];
+if(isset($_POST["assignToBdm"])) {
+    $assignToBdm = $_POST["assignToBdm"];
+} else {
+    /** bde's can set their manager in here */
+    $assignToBdm = "";
+}
 $clientTotalContacts = $_POST["clientTotalContacts"];
 setCompanyDetails();
 
@@ -80,7 +86,7 @@ function validateCompanyDetails() {
  * Contact Ops
  */
 function setContactDetails($client_company_id) {
-    global $clientTotalContacts, $contacts;
+    global $clientTotalContacts, $contacts, $assignToBdm;
     for($i = 1; $i <= $clientTotalContacts; $i++) {
         $contact = new Contact();
         $contact->setFirstName($_POST['contact_form_'.$i.'_firstName']);
@@ -97,6 +103,7 @@ function setContactDetails($client_company_id) {
         $contact->setFacebook($_POST['contact_form_'.$i.'_facebook']);
         $contact->setTwitter($_POST['contact_form_'.$i.'_twitter']);
         $contact->setCompany($client_company_id);
+        $contact->setAssocManager($assignToBdm);
         array_push($contacts, $contact);
     }
 }

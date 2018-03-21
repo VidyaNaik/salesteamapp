@@ -135,6 +135,30 @@ class UserService {
     }
 
     /**
+     * Get all users by role id
+     */
+    public function getAllByRoleId($roleId) {
+        $stmt = $this->connection->prepare("select * from users where role_id = ? order by user_id desc");
+        $stmt->bind_param("i", $roleId);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $listOfUsers = array();
+        while($row = $res->fetch_assoc()) {
+            $user = new User();
+            $user->setId($row['user_id']);
+            $user->setEmpId($row['user_emp_id']);
+            $user->setName($row['user_name']);
+            $user->setEmail($row['user_email']);
+            $user->setPassword($this->openssl->decrypt($row['user_password']));
+            $user->setRole($row['role_id']);
+            $user->setManager($row['user_manager_id']);
+            array_push($listOfUsers, $user);
+        }
+        $stmt->close();
+        return $listOfUsers;
+    }
+
+    /**
      * Get all users by role id and offset
      */
     public function getAllByRoleIdAndOffset($roleId, $offset) {

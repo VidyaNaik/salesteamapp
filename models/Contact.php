@@ -19,6 +19,7 @@ class Contact {
     public $status;
     public $added;
     public $company;
+    public $assocManager;
 
     /**
      * Getters
@@ -91,6 +92,10 @@ class Contact {
         return $this->company;
     }
 
+    public function getAssocManager() {
+        return $this->assocManager;
+    }
+
     /**
      * Setters
      */
@@ -160,6 +165,10 @@ class Contact {
 
     public function setCompany($company) {
         $this->company = $company;
+    }
+
+    public function setAssocManager($assocManager) {
+        $this->assocManager = $assocManager;
     }
 
     

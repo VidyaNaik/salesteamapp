@@ -8,6 +8,10 @@ if($_SESSION['role'] !== "ADMIN") {
     header("Location: ../../error/noaccess.php");
 }
 
+if(!isset($_SESSION["serverData"])) {
+    header("Location: ../../error/noaccess.php");
+}
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
 $errContacts = $_SESSION['serverData'];

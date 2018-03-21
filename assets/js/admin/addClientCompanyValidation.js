@@ -21,6 +21,9 @@ var companyLinkedInErrMsg = "";
 var companyAddress = "";
 var companyAddressErrFlag = true;
 var companyAddressErrMsg = "";
+var assignToBdm = "";
+var assignToBdmErrFlag = true;
+var assignToBdmErrMsg = "";
 
 function validateCompanyName() {
     companyName = $("#companyName").val();
@@ -132,6 +135,19 @@ function validateCompanyAddress() {
     $("#companyAddressErrMsg").text(companyAddressErrMsg);
 }
 
+function validateAssignToBdm() {
+    assignToBdm = $("#assignToBdm").val();
+    assignToBdmErrFlag = false;
+    assignToBdmErrMsg = "";
+    $("#assignToBdm").css({"border-color":"green"});
+    if(assignToBdm == "" || assignToBdm == null || assignToBdm == undefined) {
+        assignToBdmErrFlag = true;
+        assignToBdmErrMsg = "BDM Is Required !";
+        $("#assignToBdm").css({"border-color":"red"});
+    }
+    $("#assignToBdmErrMsg").text(assignToBdmErrMsg);
+}
+
 function addClientFormValidation() {
     validateCompanyName();
     validateCompanyWebsite();
@@ -139,11 +155,13 @@ function addClientFormValidation() {
     validateCompanyEmail();
     validateCompanyLinkedIn();
     validateCompanyAddress();
+    validateAssignToBdm();
     if(companyNameErrFlag == false && companyWebsiteErrFlag == false 
         && companyPhoneErrFlag == false && companyEmailErrFlag == false 
-            && companyLinkedInErrFlag == false && companyAddressErrMsg == false) {
-                $("#addClientForm").submit();
-            }
+            && companyLinkedInErrFlag == false && companyAddressErrMsg == false 
+                && assignToBdmErrFlag == false) {
+                    $("#addClientForm").submit();
+                }
 }
 
 function addClientFormReset() {

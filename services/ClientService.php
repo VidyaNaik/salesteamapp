@@ -141,8 +141,9 @@ class ClientService {
         $status = "NEW";
         $added = date("Y-m-d H:i:s");
         $companyId = $contact->getCompany();
-        $stmt = $this->connection->prepare("insert into client_contacts (client_contact_first_name, client_contact_last_name, client_contact_email, client_contact_category, client_contact_designation, client_contact_mobile, city_id, state_id, country_id, client_contact_address, client_contact_linkedin, client_contact_facebook, client_contact_twitter, client_contact_status, client_contact_added, client_company_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssiiiissssssi", $firstName, $lastName, $email, $category, $designation, $mobile, $city, $state, $country, $address, $linkedIn, $facebook, $twitter, $status, $added, $companyId);
+        $assocManager = $contact->getAssocManager();
+        $stmt = $this->connection->prepare("insert into client_contacts (client_contact_first_name, client_contact_last_name, client_contact_email, client_contact_category, client_contact_designation, client_contact_mobile, city_id, state_id, country_id, client_contact_address, client_contact_linkedin, client_contact_facebook, client_contact_twitter, client_contact_status, client_contact_added, client_company_id, assoc_manager_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssiiiissssssii", $firstName, $lastName, $email, $category, $designation, $mobile, $city, $state, $country, $address, $linkedIn, $facebook, $twitter, $status, $added, $companyId, $assocManager);
         $stmt->execute();
         $stmt->close();
     }
