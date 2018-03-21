@@ -289,4 +289,18 @@ class ClientService {
         return $affected_rows;
     }
 
+    public function deleteCompanyByIdCascadeDeleteContacts($companyId) {
+        $stmt = $this->connection->prepare("delete from client_contacts where client_company_id  = ?");
+        $stmt->bind_param("i", $companyId);
+        $stmt->execute();
+        $affected_rows = $stmt->affected_rows;
+        $stmt->close();
+        $stmt = $this->connection->prepare("delete from client_companies where client_company_id = ?");
+        $stmt->bind_param("i", $companyId);
+        $stmt->execute();
+        $affected_rows += $stmt->affected_rows;
+        $stmt->close();
+        return $affected_rows;
+    }
+
 }

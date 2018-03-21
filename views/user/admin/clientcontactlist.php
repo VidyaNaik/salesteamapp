@@ -119,18 +119,18 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
     function deleteContact(contactId) {
         var result = confirm("Are You Sure?");
-            if(result) {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo BASEURL ?>actions/admin/performdeletecontact.php",
-                    data: {
-                        contactId: contactId
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    }
-                });
-            }
+        if(result) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/admin/performdeletecontact.php",
+                data: {
+                    contactId: contactId
+                },
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
+        }
     }
 
     </script>

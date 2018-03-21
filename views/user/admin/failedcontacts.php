@@ -1,4 +1,5 @@
 <?php
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
 session_start();
 /**
  * Admin Only Allowed
@@ -8,6 +9,8 @@ if($_SESSION['role'] !== "ADMIN") {
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
+
+$errContacts = $_SESSION['serverData'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +33,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">Failed Contacts</h2>
+                    <h2 class="text-center">Failed To Add Some Client Contact</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -41,9 +44,36 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <pre>
-                                <?php $_SESSION['serverData'] ?>
-                            </pre>
+                                <?php
+                                    foreach ($errContacts as $key=>$value) {
+                                        echo "<h3>Contact ".($key+1)."</h3>";
+                                        echo "<table class='table table-bordered app-table-theme'>";
+                                        echo "<tr class='err-reason'>";
+                                        echo "<th>Reason</th>";
+                                        echo "<td>".$value["errMsg"]."</td>";
+                                        echo "</tr>";
+                                        echo "<tr>";
+                                        echo "<th>First Name</th>";
+                                        echo "<td>".$value["errContact"]->firstName."</td>";
+                                        echo "</tr>";
+                                        echo "<tr>";
+                                        echo "<th>Last Name</th>";
+                                        echo "<td>".$value["errContact"]->lastName."</td>";
+                                        echo "</tr>";
+                                        echo "<tr>";
+                                        echo "<th>Email</th>";
+                                        echo "<td>".$value["errContact"]->email."</td>";
+                                        echo "</tr>";
+                                        echo "<tr>";
+                                        echo "<th>Mobile</th>";
+                                        echo "<td>".$value["errContact"]->mobile."</td>";
+                                        echo "</tr>";
+                                        echo "</table>";
+                                    }
+                                ?>
+                            <div>
+                                <h3 class="text-center"><a href="<?php echo BASEURL ?>views/login.php">&lt;&lt; Go Back</a></h3>
+                            </div>
                         </div>
                     </div>
                 </div>

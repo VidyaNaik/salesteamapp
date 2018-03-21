@@ -26,7 +26,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         <div class="container-fluid">
             <div class="noaccess-msg">
                 <h2 class="text-center">You're trying to access a <span style="color:red;">Fobidden<span> resource</h2>
-                <h3 class="text-center"><a href="<?php echo BASEURL ?>views/login.php">&lt;&lt; Go Back<a></h3>
+                <h3 class="text-center"><a href="<?php echo BASEURL ?>views/login.php">&lt;&lt; Go Back</a></h3>
             </div>
         </div>
     </div>

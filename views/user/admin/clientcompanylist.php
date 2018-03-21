@@ -117,8 +117,20 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
         window.location = 'showcompany.php?companyId=' + companyId;
     }
 
-    function deleteCompany(id) {
-        alert(id);
+    function deleteCompany(companyId) {
+        var result = confirm("Are You Sure?");
+        if(result) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo BASEURL ?>actions/admin/performdeletecompany.php",
+                data: {
+                    companyId: companyId
+                },
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
+        }
     }
 
     </script>
