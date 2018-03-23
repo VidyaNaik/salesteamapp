@@ -7,6 +7,6 @@ if(isset($_SESSION['email'])) {
     if(isset($_SESSION["serverData"])) {
         unset($_SESSION['serverData']);
     }
-    header("Location: ../views/login.php");
 }
+header("Location: ../views/login.php");
 ?>
