@@ -178,6 +178,7 @@ function addClientFormResetErrFlags() {
     companyEmailErrFlag = true;
     companyLinkedInErrFlag = true;
     companyAddressErrFlag = true;
+    assignToBdmErrFlag = true;
 }
 
 function addClientFormResetErrMsgs() {
@@ -187,6 +188,7 @@ function addClientFormResetErrMsgs() {
     companyEmailErrMsg = "";
     companyLinkedInErrMsg = "";
     companyAddressErrMsg = "";
+    assignToBdmErrMsg = "";
 }
 
 function addClientFormResetErrOnForm() {
@@ -196,16 +198,19 @@ function addClientFormResetErrOnForm() {
     $("#companyEmailErrMsg").text("");
     $("#companyLinkedInErrMsg").text("");
     $("#companyAddressErrMsg").text("");
+    $("#assignToBdmErrMsg").text("");
     $("#companyName").val("");
     $("#companyWebsite").val("");
     $("#companyPhone").val("");
     $("#companyEmail").val("");
     $("#companyLinkedIn").val("");
     $("#companyAddress").val("");
+    $("#assignToBdm").val("");
     $("#companyName").css({"border-color":"#ccc"});
     $("#companyWebsite").css({"border-color":"#ccc"});
     $("#companyPhone").css({"border-color":"#ccc"});
     $("#companyEmail").css({"border-color":"#ccc"});
     $("#companyLinkedIn").css({"border-color":"#ccc"});
     $("#companyAddress").css({"border-color":"#ccc"});
+    $("#assignToBdm").css({"border-color":"#ccc"});
 }

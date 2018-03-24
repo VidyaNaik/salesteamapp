@@ -45,6 +45,10 @@ body {
     margin: 10px;
 }
 
+.form-group-mod-vertical-partition {
+    margin-bottom: 15px;
+}
+
 .list-heading {
     height: 20px;
 }

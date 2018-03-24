@@ -13,6 +13,7 @@ $clientService = new ClientService();
 $company = new Company();
 $contacts = array();
 $errContacts= array();
+$isContactsCsvExists = false;
 
 $companyName = $_POST["companyName"];
 $companyWebsite = $_POST["companyWebsite"];
@@ -27,8 +28,11 @@ if(isset($_POST["assignToBdm"])) {
     $assignToBdm = "";
 }
 $clientTotalContacts = $_POST["clientTotalContacts"];
-setCompanyDetails();
+if(isset($_POST["contactsCSV"])) {
+    $isContactsCsvExists = true;
+}
 
+setCompanyDetails();
 if(validateCompanyDetails()) {
     global $clientTotalContacts;
     if($clientService->checkCompanyWebsite($companyWebsite)) {
@@ -36,6 +40,7 @@ if(validateCompanyDetails()) {
         if($clientTotalContacts > 0) {
             setContactDetails($max_client_company_id); 
             saveContactDetails();
+            trySaveContactDetailsFromCsv();
             if(count($errContacts) > 0) {
                 $_SESSION['serverMsg'] = "Client Company Added Successfully But Some Contacts Were Not Added!";
                 $_SESSION['serverData'] = $errContacts;
@@ -134,5 +139,16 @@ function validateContactDetails($contact) {
                     }
                     return true;
 }
+
+/**
+ * CSV Ops
+ */
+
+ function trySaveContactDetailsFromCsv() {
+    if(!isContactsCsvExists) {
+        return;
+    }
+    $csvCheck =  array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+ }
 
 ?>
