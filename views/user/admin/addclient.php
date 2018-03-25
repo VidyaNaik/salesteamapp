@@ -43,7 +43,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     </div>
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <form id="addClientForm" class="form-horizontal" action="<?php echo BASEURL; ?>actions/admin/performaddclient.php" method="post">
+                            <form id="addClientForm" class="form-horizontal" enctype="multipart/form-data" action="<?php echo BASEURL; ?>actions/admin/performaddclient.php" method="post">
                                 <div class="form-group form-group-mod">
                                     <label class="control-label col-sm-3">Company Name</label>
                                     <div class="col-sm-9">
@@ -96,28 +96,29 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                                     </div>
                                 </div>
                                 <div class="form-group form-group-mod">
-                                    <label class="control-label col-sm-3">Contacts</label>
+                                    <label class="control-label col-sm-3">Contacts Form</label>
                                     <div class="col-sm-9">
                                         <div id="contacts-form-upload" class="form-group-mod-vertical-partition">
                                             <div id="client-contact-pool" class="client-contact-pool">
                                                 <button id="add-contact-btn" type="button" class="btn btn-default form-btn" onclick="showContactForm()"><span class="glyphicon glyphicon-plus"></span> Add Contact</button>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-mod">
+                                    <label class="control-label col-sm-3">Contacts CSV</label>
+                                    <div class="col-sm-9">
                                         <div id="contacts-csv-upload" class="form-group-mod-vertical-partition">
                                             <div id="client-contact-pool" class="client-contact-pool">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <a href="../../../assets/csv/sta-contact-template.csv" class="btn btn-info" download>Download Template</a>
+                                                        <input name="contactsCSV" type="file" class="btn btn-default">
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <input name="contactsCSV" type="file" class="btn btn-default">
+                                                        <a href="../../../assets/csv/sta-contact-template.csv" class="btn btn-info" download>Download Template</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group-mod-vertical-partition">
-                                            <button id="upload-via-form-btn" type="button" class="btn btn-default" onclick="showUploadViaForm()">Add Contacts Via Form</button>
-                                            <button id="upload-via-csv-btn" type="button" class="btn btn-default" onclick="showUploadViaCSV()">Add Contacts Via CSV</button>
                                         </div>
                                     </div>
                                 </div>
@@ -520,8 +521,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 
         $(document).ready(function() {
             loadAllBdms();
-            $("#contacts-csv-upload").hide();
-            $("#upload-via-form-btn").hide();
             $("#contact-country-div select").change(function() {
                 var stateOptionsBuilder = "<option value=''>Select State</option>";
                 var cityOptionsBuilder = "<option value=''>Select City</option>";
@@ -629,20 +628,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
                     $("#contact-city-div select").html(optionsBuilder);
                 }
             });
-        }
-
-        function showUploadViaForm() {
-            $("#contacts-csv-upload").hide();
-            $("#upload-via-form-btn").hide();
-            $("#contacts-form-upload").show();
-            $("#upload-via-csv-btn").show();
-        }
-
-        function showUploadViaCSV() {
-            $("#contacts-form-upload").hide();
-            $("#upload-via-csv-btn").hide();
-            $("#contacts-csv-upload").show();
-            $("#upload-via-form-btn").show();
         }
 
     </script>

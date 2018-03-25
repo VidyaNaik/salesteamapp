@@ -158,4 +158,49 @@ class LocationService {
         return $listOfCities;
     }
 
+    public function getCountryByName($countryName) {
+        $stmt = $this->connection->prepare("select * from countries where country_name = ?");
+        $stmt->bind_param("s", $countryName);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $country = new Country();
+        if($row = $res->fetch_assoc()) {
+            $country->setId($row['country_id']);
+            $country->setName($row['country_name']);
+        }
+        $stmt->close();
+        return $country;
+    }
+
+    public function getStateByName($stateName) {
+        $stmt = $this->connection->prepare("select * from states where state_name = ?");
+        $stmt->bind_param("s", $stateName);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $state = new State();
+        if($row = $res->fetch_assoc()) {
+            $state->setId($row['state_id']);
+            $state->setName($row['state_name']);
+            $state->setCountry($row['country_id']);
+        }
+        $stmt->close();
+        return $state;
+    }
+
+    public function getCityByName($cityName) {
+        $stmt = $this->connection->prepare("select * from cities where city_name = ?");
+        $stmt->bind_param("s", $cityName);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $city = new City();
+        if($row = $res->fetch_assoc()) {
+            $city->setId($row['city_id']);
+            $city->setName($row['city_name']);
+            $city->setState($row['state_id']);
+            $city->setCountry($row['country_id']);
+        }
+        $stmt->close();
+        return $city;
+    }
+
 }

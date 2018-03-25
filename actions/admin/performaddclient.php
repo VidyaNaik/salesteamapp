@@ -6,15 +6,15 @@ if(!isset($_SESSION["email"])) {
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/ClientService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/LocationService.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Company.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
 
+$locationService = new LocationService();
 $clientService = new ClientService();
 $company = new Company();
 $contacts = array();
 $errContacts= array();
-$isContactsCsvExists = false;
-
 $companyName = $_POST["companyName"];
 $companyWebsite = $_POST["companyWebsite"];
 $companyAddress = $_POST["companyAddress"];
@@ -28,19 +28,15 @@ if(isset($_POST["assignToBdm"])) {
     $assignToBdm = "";
 }
 $clientTotalContacts = $_POST["clientTotalContacts"];
-if(isset($_POST["contactsCSV"])) {
-    $isContactsCsvExists = true;
-}
-
 setCompanyDetails();
 if(validateCompanyDetails()) {
     global $clientTotalContacts;
     if($clientService->checkCompanyWebsite($companyWebsite)) {
         $max_client_company_id = $clientService->saveCompany($company);
-        if($clientTotalContacts > 0) {
+        if($clientTotalContacts > 0 || !empty($_FILES['contactsCSV']['name'])) {
             setContactDetails($max_client_company_id); 
+            setContactDetailsFromCsv($max_client_company_id);
             saveContactDetails();
-            trySaveContactDetailsFromCsv();
             if(count($errContacts) > 0) {
                 $_SESSION['serverMsg'] = "Client Company Added Successfully But Some Contacts Were Not Added!";
                 $_SESSION['serverData'] = $errContacts;
@@ -59,18 +55,8 @@ if(validateCompanyDetails()) {
 }
 
 /**
- * Company Ops
+ * Validate Compamny
  */
-function setCompanyDetails() {
-    global $company;
-    $company->setName($GLOBALS['companyName']);
-    $company->setWebsite($GLOBALS['companyWebsite']);
-    $company->setAddress($GLOBALS['companyAddress']);
-    $company->setPhone($GLOBALS['companyPhone']);
-    $company->setEmail($GLOBALS['companyEmail']);
-    $company->setLinkedIn($GLOBALS['companyLinkedIn']);
-}
-
 function validateCompanyDetails() {
     global $company;
     if($company->getName() == "" || $company->getWebsite() == "" || 
@@ -88,7 +74,34 @@ function validateCompanyDetails() {
 }
 
 /**
- * Contact Ops
+ * Set Company
+ */
+function setCompanyDetails() {
+    global $company;
+    $company->setName($GLOBALS['companyName']);
+    $company->setWebsite($GLOBALS['companyWebsite']);
+    $company->setAddress($GLOBALS['companyAddress']);
+    $company->setPhone($GLOBALS['companyPhone']);
+    $company->setEmail($GLOBALS['companyEmail']);
+    $company->setLinkedIn($GLOBALS['companyLinkedIn']);
+}
+
+ /**
+  * Validate Contacts
+  */
+function validateContactDetails($contact) {
+    if($contact->getFirstName() == "" || $contact->getLastName() == "" || $contact->getEmail() == "" || 
+        $contact->getCategory() == "" || $contact->getDesignation() == "" || $contact->getMobile() == "" || 
+            $contact->getCity() === "" || $contact->getState() === "" || $contact->getCountry() === "" || 
+                $contact->getAddress() == "" || $contact->getLinkedIn() == "" || $contact->getFacebook() == "" || 
+                    $contact->getTwitter() == "") {
+                        return ERR_BLANK;
+                    }
+                    return true;
+}
+
+/**
+ * Set Contacts From Form
  */
 function setContactDetails($client_company_id) {
     global $clientTotalContacts, $contacts, $assignToBdm;
@@ -113,9 +126,60 @@ function setContactDetails($client_company_id) {
     }
 }
 
+/**
+ * Set Contacts From CSV
+ */
+
+function setContactDetailsFromCsv($max_client_company_id) {
+    global $contacts, $assignToBdm, $locationService;
+    $csvMimes =  array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+    if(!empty($_FILES['contactsCSV']['name']) && in_array($_FILES['contactsCSV']['type'], $csvMimes)) {
+        $contactsCSVFile = fopen($_FILES['contactsCSV']['tmp_name'], 'r');
+        fgetcsv($contactsCSVFile);
+        while(($data = fgetcsv($contactsCSVFile)) !== false) {
+            $country = $locationService->getCountryByName($data[9]);
+            $state = $locationService->getStateByName($data[8]);
+            $city = $locationService->getCityByName($data[7]);
+            $contact = new Contact();
+            $contact->setCountry(0);
+            $contact->setState(0);
+            $contact->setCity(0);
+            if($country->id != null) {
+                $contact->setCountry($country->id);
+            }
+            if($state->id != null) {
+                if($state->country == $country->id) {
+                    $contact->setState($state->id);
+                }
+            }
+            if($city->id != null) {
+                if($city->country == $country->id && $city->state == $state->id) {
+                    $contact->setCity($city->id);
+                }
+            }
+            $contact->setFirstName($data[0]);
+            $contact->setLastName($data[1]);
+            $contact->setEmail($data[2]);
+            $contact->setMobile($data[3]);
+            $contact->setCategory($data[4]);
+            $contact->setDesignation($data[5]);
+            $contact->setAddress($data[6]);
+            $contact->setLinkedIn($data[10]);
+            $contact->setFacebook($data[11]);
+            $contact->setTwitter($data[12]);
+            $contact->setCompany($max_client_company_id);
+            $contact->setAssocManager($assignToBdm);
+            array_push($contacts, $contact);
+        }
+    }
+ }
+
+/**
+ * Save Contacts
+ */
 function saveContactDetails() {
-    global $clientTotalContacts, $contacts, $errContacts, $clientService;
-    for($i = 0; $i < $clientTotalContacts; $i++) {
+    global $contacts, $errContacts, $clientService;
+    for($i = 0; $i < count($contacts); $i++) {
         $contactValidityStatus = validateContactDetails($contacts[$i]);
         if($contactValidityStatus === true) {
             if($clientService->checkContactEmail($contacts[$i]->getEmail())) {
@@ -128,27 +192,5 @@ function saveContactDetails() {
         }   
     }
 }
-
-function validateContactDetails($contact) {
-    if($contact->getFirstName() == "" || $contact->getLastName() == "" || $contact->getEmail() == "" || 
-        $contact->getCategory() == "" || $contact->getDesignation() == "" || $contact->getMobile() == "" || 
-            $contact->getCity() == "" || $contact->getState() == "" || $contact->getCountry() == "" || 
-                $contact->getAddress() == "" || $contact->getLinkedIn() == "" || $contact->getFacebook() == "" || 
-                    $contact->getTwitter() == "") {
-                        return ERR_BLANK;
-                    }
-                    return true;
-}
-
-/**
- * CSV Ops
- */
-
- function trySaveContactDetailsFromCsv() {
-    if(!isContactsCsvExists) {
-        return;
-    }
-    $csvCheck =  array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
- }
 
 ?>
