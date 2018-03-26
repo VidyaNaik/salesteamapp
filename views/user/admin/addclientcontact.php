@@ -7,7 +7,7 @@ if($_SESSION['role'] !== "ADMIN") {
     header("Location: ../../error/noaccess.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
 $companyId = $_GET['companyId'];
 ?>
 <!DOCTYPE html>

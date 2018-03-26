@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,9 +17,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
 <body>
     <?php
     if(!isset($_SESSION["email"])) {
-        include($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/views/navbar-unauth.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/views/navbar-unauth.php');
     } else {
-        include($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/views/user/navbar.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/views/user/navbar.php');
     }
     ?>
     <div class="content-view">
@@ -32,9 +32,9 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
     </div>
     <?php
     if(!isset($_SESSION["email"])) {
-        include($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/views/footer.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/views/footer.php');
     } else {
-        include($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/views/user/footer.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/views/user/footer.php');
     }
     ?>
 </body>

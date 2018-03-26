@@ -1,6 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/utility/DatabaseManager.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Role.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/utility/DatabaseManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Role.php');
 
 class RoleService {
 

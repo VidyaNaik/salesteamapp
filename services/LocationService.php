@@ -1,9 +1,9 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/utility/DatabaseManager.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Country.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/State.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/City.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/utility/DatabaseManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Country.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/State.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/City.php');
 
 class LocationService {
 

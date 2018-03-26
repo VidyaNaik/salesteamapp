@@ -2,7 +2,7 @@
 /**
  * Constants
  */
-define("BASEURL", "http://localhost/salesteamapp/");
+define("BASEURL", "http://". $_SERVER['SERVER_NAME'] ."/". explode("/", $_SERVER['PHP_SELF'])[1] ."/");
 define("DEFAULT_PASSWORD", "sales1234");
 define("BDM_LIST_LIMIT", 4);
 define("BDE_LIST_LIMIT", 4);

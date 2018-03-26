@@ -7,8 +7,8 @@ if($_SESSION['role'] !== "ADMIN") {
     header("Location: ../../views/error/noaccess.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/BdmService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/services/BdmService.php');
 
 $bdmService = new BdmService();
 $userId = $_POST['userId'];

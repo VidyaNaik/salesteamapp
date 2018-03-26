@@ -4,7 +4,7 @@ if(!isset($_SESSION["email"])) {
     header("Location:../login.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/UserService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/services/UserService.php');
 $userService = new UserService();
 $fname = $_POST["fname"];
 $email = $_POST["email"];

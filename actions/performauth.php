@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/AuthService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/services/AuthService.php');
 
 /**
  * No Direct Access Allowed To Auth

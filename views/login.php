@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
+
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
 
 if(isset($_SESSION["email"])) {
     header("Location:user/home.php");

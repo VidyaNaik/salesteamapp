@@ -4,9 +4,9 @@ if(!isset($_SESSION["email"])) {
     header("Location:../login.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/ClientService.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/services/ClientService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Contact.php');
 
 $clientService = new ClientService();
 $contact = new Contact();

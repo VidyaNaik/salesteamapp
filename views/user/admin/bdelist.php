@@ -7,8 +7,8 @@ if($_SESSION['role'] !== "ADMIN") {
     header("Location: ../../error/noaccess.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/services/RoleService.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/services/RoleService.php');
 
 $roleService = new RoleService();
 $role = $roleService->getByRoleName("BDE");

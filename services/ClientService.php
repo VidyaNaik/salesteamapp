@@ -1,8 +1,8 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/utility/DatabaseManager.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Company.php');
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/utility/DatabaseManager.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Company.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Contact.php');
 
 class ClientService {
 

@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/models/Contact.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/models/Contact.php');
 session_start();
 /**
  * Admin Only Allowed
@@ -12,7 +12,7 @@ if(!isset($_SESSION["serverData"])) {
     header("Location: ../../error/noaccess.php");
 }
 
-include_once($_SERVER['DOCUMENT_ROOT'].'/salesteamapp/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1] .'/config.php');
 
 $errContacts = $_SESSION['serverData'];
 ?>
