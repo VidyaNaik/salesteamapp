@@ -50,9 +50,10 @@ class ClientService {
         $companyPhone = $company->getPhone();
         $companyEmail = $company->getEmail();
         $companyLinkedIn = $company->getLinkedIn();
+        $assocManager = $company->getAssocManager();
         $this->connection->query("lock tables client_companies write");
-        $stmt = $this->connection->prepare("insert into client_companies (client_company_name, client_company_website, client_company_address, client_company_phone, client_company_email, client_company_linkedin) values (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssiss", $companyName, $companyWebsite, $companyAddress, $companyPhone, $companyEmail, $companyLinkedIn);
+        $stmt = $this->connection->prepare("insert into client_companies (client_company_name, client_company_website, client_company_address, client_company_phone, client_company_email, client_company_linkedin, assoc_manager_id) values (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssissi", $companyName, $companyWebsite, $companyAddress, $companyPhone, $companyEmail, $companyLinkedIn, $assocManager);
         $stmt->execute();
         $stmt->close();
         $query = $this->connection->query("select max(client_company_id) from client_companies");
@@ -184,6 +185,7 @@ class ClientService {
             $company->setPhone($row['client_company_phone']);
             $company->setEmail($row['client_company_email']);
             $company->setLinkedIn($row['client_company_linkedin']);
+            $company->setAssocManager($row['assoc_manager_id']);
         }
         $stmt->close();
         return $company;

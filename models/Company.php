@@ -9,6 +9,7 @@ class Company {
     public $phone;
     public $email;
     public $linkedin;
+    public $assocManager;
 
     /**
      * Getters
@@ -41,6 +42,10 @@ class Company {
         return $this->linkedin;
     }
 
+    public function getAssocManager() {
+        return $this->assocManager;
+    }
+
     /**
      * Setters
      */
@@ -70,6 +75,10 @@ class Company {
 
     public function setLinkedIn($linkedin) {
         $this->linkedin = $linkedin;
+    }
+
+    public function setAssocManager($assocManager) {
+        $this->assocManager = $assocManager;
     }
 
     

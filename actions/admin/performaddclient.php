@@ -77,13 +77,14 @@ function validateCompanyDetails() {
  * Set Company
  */
 function setCompanyDetails() {
-    global $company;
+    global $company, $assignToBdm;
     $company->setName($GLOBALS['companyName']);
     $company->setWebsite($GLOBALS['companyWebsite']);
     $company->setAddress($GLOBALS['companyAddress']);
     $company->setPhone($GLOBALS['companyPhone']);
     $company->setEmail($GLOBALS['companyEmail']);
     $company->setLinkedIn($GLOBALS['companyLinkedIn']);
+    $company->setAssocManager($assignToBdm);
 }
 
  /**

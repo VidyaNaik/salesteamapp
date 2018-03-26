@@ -36,6 +36,8 @@ function saveContactDetails() {
     $contactValidityStatus = validateContactDetails();
     if($contactValidityStatus === true) {
         if($clientService->checkContactEmail($contact->getEmail())) {
+            $company = $clientService->getCompanyById($_POST['company-id']);
+            $contact->setAssocManager($company->getAssocManager());
             $clientService->saveContact($contact);
             $_SESSION['serverMsg'] = "Client Contact Saved Successfully!";
             header("Location:../../views/user/admin/showcompany.php?companyId=".$contact->getCompany());
