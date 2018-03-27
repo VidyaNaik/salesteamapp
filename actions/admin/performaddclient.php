@@ -38,7 +38,7 @@ if(validateCompanyDetails()) {
             setContactDetailsFromCsv($max_client_company_id);
             saveContactDetails();
             if(count($errContacts) > 0) {
-                $_SESSION['serverMsg'] = "Client Company Added Successfully But Some Contacts Were Not Added!";
+                $_SESSION['serverMsg'] = "Client Added Successfully But Some Contacts Were Not Added!";
                 $_SESSION['serverData'] = $errContacts;
                 header("Location:../../views/user/admin/failedcontacts.php");
                 exit;
@@ -47,7 +47,7 @@ if(validateCompanyDetails()) {
         $_SESSION['serverMsg'] = "Client Added Successfully!";
         header("Location:../../views/user/admin/clientcompanylist.php");
     } else {
-        $_SESSION['serverMsg'] = "Client With This Website Is Already Uploaded";
+        $_SESSION['serverMsg'] = "Client Company With This Website Is Already Uploaded";
         header("Location:../../views/user/admin/addclient.php");
     }
 } else {

@@ -27,7 +27,6 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">Welcome To Home</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -38,8 +37,62 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
                     </div>
                     <!-- Admin Access Only -->
                     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-                        <div id="admin-container" class="role-container">
-                        
+                        <div id="admin-container">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Tracking</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a class="home-item-wrapper-link" href="admin/bdmlist.php">
+                                            <div class="home-item">
+                                                <div class="home-item-name">
+                                                    <h3>BDM Count</h3>
+                                                </div>
+                                                <div class="home-item-value">
+                                                    <h1 id="bdm-count"></h1>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="home-item-wrapper-link" href="admin/bdelist.php">
+                                            <div class="home-item">
+                                                <div class="home-item-name">
+                                                    <h3>BDE Count</h3>
+                                                </div>
+                                                <div class="home-item-value">
+                                                    <h1 id="bde-count"></h1>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="home-item-wrapper-link" href="admin/clientcompanylist.php">
+                                            <div class="home-item">
+                                                <div class="home-item-name">
+                                                    <h3>Client Companies Count</h3>
+                                                </div>
+                                                <div class="home-item-value">
+                                                    <h1 id="client-companies-count"></h1>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="home-item-wrapper-link" href="admin/clientcontactlist.php">
+                                            <div class="home-item">
+                                                <div class="home-item-name">
+                                                    <h3>Client Contacts Count</h3>
+                                                </div>
+                                                <div class="home-item-value">
+                                                    <h1 id="client-contacts-count"></h1>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     <?php endif; ?>
                     <!-- BDM Access Only -->
@@ -59,5 +112,24 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
         </div> 
     </div>
     <?php include 'footer.php';?>
+    <script>
+        $(document).ready(function() {
+            loadHomePageData();
+        });
+
+        function loadHomePageData() {
+            $.ajax({
+                type: "GET",
+                url: "<?php echo BASEURL ?>actions/admin/performfetchhomedata.php",
+                success: function(response) {
+                    $("#bdm-count").html(response.bdmsCount);
+                    $("#bde-count").html(response.bdesCount);
+                    $("#client-companies-count").html(response.clientCompaniesCount);
+                    $("#client-contacts-count").html(response.clientContactsCount);
+                    console.log(response);
+                }
+            });
+        }
+    </script>
 </body>
 </html>

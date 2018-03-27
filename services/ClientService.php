@@ -306,4 +306,16 @@ class ClientService {
         return $affected_rows;
     }
 
+    public function getCountOfCompanies() {
+        $query = $this->connection->query("select count(client_company_id) from client_companies");
+        $count_client_companies = $query->fetch_assoc()['count(client_company_id)'];
+        return $count_client_companies;
+    }
+    
+    public function getCountOfContacts() {
+        $query = $this->connection->query("select count(client_contact_id) from client_contacts");
+        $count_client_contacts = $query->fetch_assoc()['count(client_contact_id)'];
+        return $count_client_contacts;
+    }
+
 }

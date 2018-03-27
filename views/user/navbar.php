@@ -45,7 +45,7 @@
                 <?php endif; ?>
                 <!-- Admin Access Only -->
                 <?php if ($_SESSION['role'] == "ADMIN") : ?>
-                    <li><a href="admin/addlocation.php">Add Location</a></li>
+                    <li><a href="admin/configurations.php">Configurations</a></li>
                 <?php endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">

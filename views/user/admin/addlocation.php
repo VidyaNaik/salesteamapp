@@ -30,7 +30,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
                     <?php include("sidemenu.php"); ?>
                 </div>
                 <div class="col-sm-9">
-                    <h2 class="text-center">Add New Location</h2>
+                    <h2 class="text-center">Configurations / Locations Configuration / Add Location</h2>
                     <div class="server-message" id="server-message">
                         <?php
                             if(isset($_SESSION["serverMsg"])) {
@@ -41,6 +41,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
                     </div>
                     <div class="row text-center menu-bar">
                         <div class="col-sm-12">
+                            <button id="back-btn" class="btn btn-primary action-btn btn-identical-dimension" onclick="gotoLocationsConfigPage()">Back</button>
                             <button id="add-country-btn" class="btn btn-default action-btn btn-identical-dimension" onclick="showAddCountryDiv()">Add Country</button>
                             <button id="add-state-btn" class="btn btn-default action-btn btn-identical-dimension" onclick="showAddStateDiv()">Add State</button>
                             <button id="add-city-btn" class="btn btn-default action-btn btn-identical-dimension" onclick="showAddCityDiv()">Add City</button>
@@ -149,6 +150,10 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/'. explode("/", $_SERVER['PHP_SELF'])[1
                 loadStatesForCountry();
             });
         });
+
+        function gotoLocationsConfigPage() {
+            window.location.href = "locationconfiguration.php";
+        }
 
         function showAddCountryDiv() {
             addDivType = "country";

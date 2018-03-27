@@ -208,5 +208,11 @@ class UserService {
         return $listOfUsers;
     }
 
+    public function getCountByRoleId($roleId) {
+        $query = $this->connection->query("select count(user_id) from users where role_id = '$roleId'");
+        $count_users = $query->fetch_assoc()['count(user_id)'];
+        return $count_users;
+    }
+
 }
 ?>

@@ -22,6 +22,6 @@
         <a href="admin/clientcontactlist.php" class="list-group-item">Client Contact List</a>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == "ADMIN") : ?>
-        <a href="admin/addlocation.php" class="list-group-item">Add Location</a>
+        <a href="admin/configurations.php" class="list-group-item">Configurations</a>
     <?php endif; ?>
 </div>
